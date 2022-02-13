@@ -11,6 +11,7 @@ includes:
   - errors
   - auth
   - user
+  - like
 
 search: false
 
