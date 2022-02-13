@@ -1,225 +1,244 @@
 ---
-title: API Reference
+title: Madome API Reference
 
 language_tabs: # must be one of https://git.io/vQNgJ
   - shell
-  - ruby
-  - python
-  - javascript
 
 toc_footers:
-  - <a href='#'>Sign Up for a Developer Key</a>
   - <a href='https://github.com/slatedocs/slate'>Documentation Powered by Slate</a>
 
 includes:
   - errors
 
-search: true
+search: false
 
 code_clipboard: true
 
 meta:
   - name: description
-    content: Documentation for the Kittn API
+    content: Documentation for Madome API
 ---
 
 # Introduction
 
-Welcome to the Kittn API! You can use our API to access Kittn API endpoints, which can get information on various cats, kittens, and breeds in our database.
-
-We have language bindings in Shell, Ruby, Python, and JavaScript! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.
-
-This example API documentation page was created with [Slate](https://github.com/slatedocs/slate). Feel free to edit it and use it as a base for your own API's documentation.
-
-# Authentication
-
-> To authorize, use this code:
-
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-```
-
 ```shell
-# With shell, you can just pass the correct header with each request
 curl "api_endpoint_here" \
-  -H "Authorization: meowmeowmeow"
+    -H "Cookie: madome_access_token=ACCESS_TOKEN; madome_refresh_token=REFRESH_TOKEN"
 ```
 
-```javascript
-const kittn = require('kittn');
+마도메 API
 
-let api = kittn.authorize('meowmeowmeow');
-```
+요청하려는 API 설명에 토큰 미포함에 대한 설명이 있지 않으면 토큰을 포함해서 요청을 보내면 돼요.
 
-> Make sure to replace `meowmeowmeow` with your API key.
+![auth-flowchart](auth-flowchart.svg)
 
-Kittn uses API keys to allow access to the API. You can register a new Kittn API key at our [developer portal](http://example.com/developers).
+# Auth
 
-Kittn expects for the API key to be included in all API requests to the server in a header that looks like the following:
-
-`Authorization: meowmeowmeow`
-
-<aside class="notice">
-You must replace <code>meowmeowmeow</code> with your personal API key.
-</aside>
-
-# Kittens
-
-## Get All Kittens
-
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.get
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.get()
-```
+## Create Authcode
 
 ```shell
-curl "http://example.com/api/kittens" \
-  -H "Authorization: meowmeowmeow"
+curl \
+    -X POST \
+    -H "Content-Type: application/json" \
+    -d '{ "email": "user@madome.app" }' \
+    "/auth/code"
 ```
 
-```javascript
-const kittn = require('kittn');
+> Body Parameters
 
-let api = kittn.authorize('meowmeowmeow');
-let kittens = api.kittens.get();
+```jsonc
+{ "email": "user@madome.app" }
 ```
 
-> The above command returns JSON structured like this:
-
-```json
-[
-  {
-    "id": 1,
-    "name": "Fluffums",
-    "breed": "calico",
-    "fluffiness": 6,
-    "cuteness": 7
-  },
-  {
-    "id": 2,
-    "name": "Max",
-    "breed": "unknown",
-    "fluffiness": 5,
-    "cuteness": 10
-  }
-]
-```
-
-This endpoint retrieves all kittens.
+`Authcode`를 생성하고, 생성된 `Authcode`를 주어진 이메일에 전송합니다.
 
 ### HTTP Request
 
-`GET http://example.com/api/kittens`
+`POST /auth/code`
+
+### Body Parameters
+
+Parameter | Description
+--------- | ----------
+email     | 생성된 `Authcode`를 수신할 이메일 주소
+
+### HTTP Response
+
+Code | Description
+---- | ----------
+201  | `Authcode`를 생성했고 메일도 전송했어요.
+404  | 주어진 이메일은 존재하지 않는 사용자의 이메일이에요.
+429  | `Authcode`를 너무 많이 생성했어요.
+
+## Create Token Pair
+
+```shell
+curl \
+    -X POST \
+    -H "Content-Type: application/json" \
+    -d '{ "email": "user@madome.app", "code": "vrKwuatEgq-V" }' \
+    "/auth/token"
+```
+
+> Body Parameters
+
+```jsonc
+{ "email": "user@madome.app"
+, "code": "vrKwuatEgq-V" }
+```
+
+> Returns Set-Cookie to HTTP Headers
+
+```text
+Set-Cookie: madome_access_token=ACCESS_TOKEN; \
+            Domain=madome.app; \
+            Max-Age=604800; \
+            Path=/; \
+            Secure; \
+            HttpOnly;
+Set-Cookie: madome_refresh_token=REFRESH_TOKEN; \
+            Domain=madome.app; \
+            Max-Age=604800; \
+            Path=/; \
+            Secure; \
+            HttpOnly;
+```
+
+[Create Authcode](#create-authcode)에서 발신한 `Authcode`를 사용해서 `Token Pair`를 생성해요.
+
+### HTTP Request
+
+`POST /auth/token`
+
+### Body Parameters
+
+Parameter | Description |
+--------- | ----------- |
+email     | `Authcode`를 전달 받은 이메일 주소 |
+code      | `Authcode` |
+
+### HTTP Response
+
+Code | Description |
+---- | ----------- |
+201  | `Token Pair`가 생성됐어요. |
+404  | `Authcode`가 만료되었거나 존재하지 않는 사용자예요. |
+
+## Check Access Token
+
+```shell
+curl \
+    -X GET \
+    "/auth/token
+```
+
+> Returns JSON
+
+```jsonc
+{ "user_id": "1e441e4d-f065-4f30-8c59-7e725f18ecf0" }
+```
+
+인증
+
+### HTTP Request
+
+`GET /auth/token`
 
 ### Query Parameters
 
-Parameter | Default | Description
---------- | ------- | -----------
-include_cats | false | If set to true, the result will also include cats.
-available | true | If set to false, the result will include kittens that have already been adopted.
+Parameter | Description | Required |
+--------- | ----------- | -------- |
+role | 인증에 필요한 최소 권한. `현재는 0 ~ 1 까지만 있음` | X |
 
-<aside class="success">
-Remember — a happy kitten is an authenticated kitten!
-</aside>
+### HTTP Response
 
-## Get a Specific Kitten
+Code | Description |
+---- | ----------- |
+200  | 인증 성공했어요. |
+401  | `Access Token`이 유효하지 않아요. |
+403  | 권한이 부족해요. |
 
-```ruby
-require 'kittn'
+<!-- ## Check and Refresh Token Pair -->
 
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.get(2)
-```
+# User
 
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.get(2)
-```
+## Get Me
 
 ```shell
-curl "http://example.com/api/kittens/2" \
-  -H "Authorization: meowmeowmeow"
+curl -X GET \
+    "/users/@me"
 ```
 
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-let max = api.kittens.get(2);
-```
-
-> The above command returns JSON structured like this:
+> Returns JSON
 
 ```json
-{
-  "id": 2,
-  "name": "Max",
-  "breed": "unknown",
-  "fluffiness": 5,
-  "cuteness": 10
-}
+{ "id": "1e441e4d-f065-4f30-8c59-7e725f18ecf0"
+, "name": "madome"
+, "email": "user@madome.app"
+, "role": 0
+, "created_at": "2022-01-24T08:06:25.673860Z"
+, "updated_at": "2022-01-24T08:06:25.673860Z" }
 ```
 
-This endpoint retrieves a specific kitten.
+자신의 정보를 가져와요.
 
-<aside class="warning">Inside HTML code blocks like this one, you can't use Markdown, so use <code>&lt;code&gt;</code> blocks to denote code.</aside>
+### HTTP Request
+
+`GET /users/@me`
+
+### HTTP Response
+
+Code | Description |
+---- | ----------- |
+200  | 자신의 정보를 가져오는데 성공했어요. |
+404  | 인증 어케 통과했노? |
+
+## Create User
+
+```shell
+curl \
+    -X POST \
+    -H "Content-Type: application/json" \
+    -d '{ "name": "madome", "email": "user@madome.app", "role": 0 }' \
+    "/users"
+```
+
+> Body Parameters
+
+```jsonc
+{ "name": "madome"
+, "email": "user@madome.app"
+, "role": 0 } // default
+```
+
+사용자를 생성해요.
 
 ### HTTP Request
 
 `GET http://example.com/kittens/<ID>`
 
-### URL Parameters
+### Body Parameters
 
-Parameter | Description
---------- | -----------
-ID | The ID of the kitten to retrieve
+Parameter | Description                         | Required |
+--------- | ----------------------------------- | -------- |
+name      | 사용자의 이름. 서버에서 유일해야해요. 이름의 길이는 `1 ~ 20` 이에요 | O
+email     | 사용자의 메일주소. 서버에서 유일해야해요. 이메일이어야 해요| O
+role      | 사용자의 권한. 현재는 `0 ~ 1` 까지만 존재해요. | X
+
+### HTTP Response
+
+Code | Description |
+---- | ----------- |
+201  | 사용자를 생성했어요. |
+400  | 잘못된 요청이에요. 다시 한번 확인해줄래요? |
+409  | 이미 존재하는 사용자예요. |
 
 ## Delete a Specific Kitten
-
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.delete(2)
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.delete(2)
-```
 
 ```shell
 curl "http://example.com/api/kittens/2" \
   -X DELETE \
   -H "Authorization: meowmeowmeow"
-```
-
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-let max = api.kittens.delete(2);
 ```
 
 > The above command returns JSON structured like this:
