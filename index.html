@@ -312,6 +312,9 @@
             <a href="#introduction" class="toc-h1 toc-link" data-title="Introduction">Introduction</a>
           </li>
           <li>
+            <a href="#naming-rules" class="toc-h1 toc-link" data-title="Naming rules">Naming rules</a>
+          </li>
+          <li>
             <a href="#errors" class="toc-h1 toc-link" data-title="Errors">Errors</a>
           </li>
           <li>
@@ -368,11 +371,17 @@
 
 <p>요청하려는 API 설명에 토큰 미포함에 대한 설명이 있지 않으면 토큰을 포함해서 요청을 보내면 돼요.</p>
 
-<p>아래 이미지는 서버에서 자동으로 이루어지는 <code>Check and Refresh Token</code>에 대한 순서도예요.</p>
+<p>토큰은 <code>HTTP Cookie</code>를 통해 관리되고, 토큰 인증 및 재발급은 인증이 필요한 API 엔드포인트에서 처리해요.</p>
 
-<p>클라이언트에서는 토큰 관리에 대해서는 신경쓰지 않아도 돼요.</p>
+<p>클라이언트는 요청을 보낼 때마다 <code>HTTP Cookie</code>에 토큰을 포함시키기만 하면 된다는 말이에요.</p>
+
+<p>아래 이미지는 인증 서버에서 실행되는 <code>Check and Refresh Token</code>에 대한 순서도예요.</p>
 
 <p><img src="images/auth-flowchart-6546b9c9.svg" alt="auth-flowchart" /></p>
+<h1 id='naming-rules'>Naming rules</h1>
+<p><code>Url</code>에 포함된 데이터들(e.g. querystring)는 <code>kebab-case</code>를 사용해요.</p>
+
+<p><code>Body</code>를 통해 오고 가는 데이터들은 <code>snake_case</code>를 사용해요.</p>
 <h1 id='errors'>Errors</h1>
 <table><thead>
 <tr>
