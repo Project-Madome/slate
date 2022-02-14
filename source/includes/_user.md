@@ -10,12 +10,14 @@ curl -X GET \
 > Returns JSON
 
 ```json
-{ "id": "1e441e4d-f065-4f30-8c59-7e725f18ecf0"
-, "name": "madome"
-, "email": "user@madome.app"
-, "role": 0
-, "created_at": "2022-01-24T08:06:25.673860Z"
-, "updated_at": "2022-01-24T08:06:25.673860Z" }
+{
+    "id": "1e441e4d-f065-4f30-8c59-7e725f18ecf0",
+    "name": "madome",
+    "email": "user@madome.app",
+    "role": 0,
+    "created_at": "2022-01-24T08:06:25.673860Z",
+    "updated_at": "2022-01-24T08:06:25.673860Z"
+}
 ```
 
 자신의 정보를 가져와요.
@@ -44,9 +46,11 @@ curl \
 > Body Parameters
 
 ```jsonc
-{ "name": "madome"
-, "email": "user@madome.app"
-, "role": 0 } // default
+{
+    "name": "madome",
+    "email": "user@madome.app",
+    "role": 0 // default
+}
 ```
 
 사용자를 생성해요.

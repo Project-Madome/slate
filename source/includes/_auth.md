@@ -13,7 +13,9 @@ curl \
 > Body Parameters
 
 ```jsonc
-{ "email": "user@madome.app" }
+{
+    "email": "user@madome.app"
+}
 ```
 
 `Authcode`를 생성하고, 생성된 `Authcode`를 주어진 이메일에 전송해요.
@@ -53,24 +55,26 @@ curl \
 > Body Parameters
 
 ```jsonc
-{ "email": "user@madome.app"
-, "code": "vrKwuatEgq-V" }
+{
+    "email": "user@madome.app",
+    "code": "vrKwuatEgq-V"
+}
 ```
 
 > Returns Set-Cookie to HTTP Headers
 
 ```text
-Set-Cookie: madome_access_token=ACCESS_TOKEN; \
-            Domain=madome.app; \
-            Max-Age=604800; \
-            Path=/; \
-            Secure; \
+Set-Cookie: madome_access_token=ACCESS_TOKEN;
+            Domain=madome.app;
+            Max-Age=604800;
+            Path=/;
+            Secure;
             HttpOnly;
-Set-Cookie: madome_refresh_token=REFRESH_TOKEN; \
-            Domain=madome.app; \
-            Max-Age=604800; \
-            Path=/; \
-            Secure; \
+Set-Cookie: madome_refresh_token=REFRESH_TOKEN;
+            Domain=madome.app;
+            Max-Age=604800;
+            Path=/;
+            Secure;
             HttpOnly;
 ```
 
@@ -109,7 +113,9 @@ curl \
 > Returns JSON
 
 ```jsonc
-{ "user_id": "1e441e4d-f065-4f30-8c59-7e725f18ecf0" }
+{
+    "user_id": "1e441e4d-f065-4f30-8c59-7e725f18ecf0"
+}
 ```
 
 인증
@@ -120,9 +126,9 @@ curl \
 
 ### Query Parameters
 
-Parameter | Description | Required |
---------- | ----------- | -------- |
-role | 인증에 필요한 최소 권한. `현재는 0 ~ 1 까지만 있음` | X |
+Parameter | Description | Value | Default |
+--------- | ----------- | ----- | ------- |
+role | 인증에 필요한 최소 권한 | `0 ~ 1` | `0` |
 
 ### HTTP Response
 

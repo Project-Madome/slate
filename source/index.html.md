@@ -12,6 +12,7 @@ includes:
   - auth
   - user
   - like
+  - notification
 
 search: false
 
@@ -25,8 +26,9 @@ meta:
 # Introduction
 
 ```shell
-curl "api_endpoint_here" \
-    -H "Cookie: madome_access_token=ACCESS_TOKEN; madome_refresh_token=REFRESH_TOKEN"
+curl \
+    -H "Cookie: madome_access_token=ACCESS_TOKEN; madome_refresh_token=REFRESH_TOKEN" \
+    "api_endpoint_here"
 ```
 
 마도메 API
