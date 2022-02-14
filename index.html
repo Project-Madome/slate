@@ -356,6 +356,14 @@
                   </li>
               </ul>
           </li>
+          <li>
+            <a href="#notification" class="toc-h1 toc-link" data-title="Notification">Notification</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#get-notifications" class="toc-h2 toc-link" data-title="Get Notifications">Get Notifications</a>
+                  </li>
+              </ul>
+          </li>
       </ul>
         <ul class="toc-footer">
             <li><a href='https://github.com/Project-Madome/slate'>Documentation Powered by Slate</a></li>
@@ -364,8 +372,9 @@
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id='introduction'>Introduction</h1><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="s2">"api_endpoint_here"</span> <span class="se">\</span>
-    <span class="nt">-H</span> <span class="s2">"Cookie: madome_access_token=ACCESS_TOKEN; madome_refresh_token=REFRESH_TOKEN"</span>
+        <h1 id='introduction'>Introduction</h1><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="se">\</span>
+    <span class="nt">-H</span> <span class="s2">"Cookie: madome_access_token=ACCESS_TOKEN; madome_refresh_token=REFRESH_TOKEN"</span> <span class="se">\</span>
+    <span class="s2">"api_endpoint_here"</span>
 </code></pre></div>
 <p>마도메 API</p>
 
@@ -415,7 +424,9 @@
 <blockquote>
 <p>Body Parameters</p>
 </blockquote>
-<div class="highlight"><pre class="highlight json-doc"><code><span class="p">{</span><span class="w"> </span><span class="nl">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"user@madome.app"</span><span class="w"> </span><span class="p">}</span><span class="w">
+<div class="highlight"><pre class="highlight json-doc"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"user@madome.app"</span><span class="w">
+</span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <p><code>Authcode</code>를 생성하고, 생성된 <code>Authcode</code>를 주어진 이메일에 전송해요.</p>
 
@@ -465,23 +476,25 @@
 <blockquote>
 <p>Body Parameters</p>
 </blockquote>
-<div class="highlight"><pre class="highlight json-doc"><code><span class="p">{</span><span class="w"> </span><span class="nl">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"user@madome.app"</span><span class="w">
-</span><span class="p">,</span><span class="w"> </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"vrKwuatEgq-V"</span><span class="w"> </span><span class="p">}</span><span class="w">
+<div class="highlight"><pre class="highlight json-doc"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"user@madome.app"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"vrKwuatEgq-V"</span><span class="w">
+</span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <blockquote>
 <p>Returns Set-Cookie to HTTP Headers</p>
 </blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>Set-Cookie: madome_access_token=ACCESS_TOKEN; \
-            Domain=madome.app; \
-            Max-Age=604800; \
-            Path=/; \
-            Secure; \
+<div class="highlight"><pre class="highlight plaintext"><code>Set-Cookie: madome_access_token=ACCESS_TOKEN;
+            Domain=madome.app;
+            Max-Age=604800;
+            Path=/;
+            Secure;
             HttpOnly;
-Set-Cookie: madome_refresh_token=REFRESH_TOKEN; \
-            Domain=madome.app; \
-            Max-Age=604800; \
-            Path=/; \
-            Secure; \
+Set-Cookie: madome_refresh_token=REFRESH_TOKEN;
+            Domain=madome.app;
+            Max-Age=604800;
+            Path=/;
+            Secure;
             HttpOnly;
 </code></pre></div>
 <p><a href="#create-authcode">Create Authcode</a>에서 발신한 <code>Authcode</code>를 사용해서 <code>Token Pair</code>를 생성해요.</p>
@@ -530,7 +543,9 @@ Set-Cookie: madome_refresh_token=REFRESH_TOKEN; \
 <blockquote>
 <p>Returns JSON</p>
 </blockquote>
-<div class="highlight"><pre class="highlight json-doc"><code><span class="p">{</span><span class="w"> </span><span class="nl">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1e441e4d-f065-4f30-8c59-7e725f18ecf0"</span><span class="w"> </span><span class="p">}</span><span class="w">
+<div class="highlight"><pre class="highlight json-doc"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1e441e4d-f065-4f30-8c59-7e725f18ecf0"</span><span class="w">
+</span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <p>인증</p>
 <h3 id='http-request-3'>HTTP Request</h3>
@@ -540,13 +555,15 @@ Set-Cookie: madome_refresh_token=REFRESH_TOKEN; \
 <tr>
 <th>Parameter</th>
 <th>Description</th>
-<th>Required</th>
+<th>Value</th>
+<th>Default</th>
 </tr>
 </thead><tbody>
 <tr>
 <td>role</td>
-<td>인증에 필요한 최소 권한. <code>현재는 0 ~ 1 까지만 있음</code></td>
-<td>X</td>
+<td>인증에 필요한 최소 권한</td>
+<td><code>0 ~ 1</code></td>
+<td><code>0</code></td>
 </tr>
 </tbody></table>
 <h3 id='http-response-3'>HTTP Response</h3>
@@ -577,12 +594,14 @@ Set-Cookie: madome_refresh_token=REFRESH_TOKEN; \
 <blockquote>
 <p>Returns JSON</p>
 </blockquote>
-<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w"> </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1e441e4d-f065-4f30-8c59-7e725f18ecf0"</span><span class="w">
-</span><span class="p">,</span><span class="w"> </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"madome"</span><span class="w">
-</span><span class="p">,</span><span class="w"> </span><span class="nl">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"user@madome.app"</span><span class="w">
-</span><span class="p">,</span><span class="w"> </span><span class="nl">"role"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
-</span><span class="p">,</span><span class="w"> </span><span class="nl">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2022-01-24T08:06:25.673860Z"</span><span class="w">
-</span><span class="p">,</span><span class="w"> </span><span class="nl">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2022-01-24T08:06:25.673860Z"</span><span class="w"> </span><span class="p">}</span><span class="w">
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1e441e4d-f065-4f30-8c59-7e725f18ecf0"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"madome"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"user@madome.app"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"role"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2022-01-24T08:06:25.673860Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2022-01-24T08:06:25.673860Z"</span><span class="w">
+</span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <p>자신의 정보를 가져와요.</p>
 <h3 id='http-request'>HTTP Request</h3>
@@ -612,9 +631,11 @@ Set-Cookie: madome_refresh_token=REFRESH_TOKEN; \
 <blockquote>
 <p>Body Parameters</p>
 </blockquote>
-<div class="highlight"><pre class="highlight json-doc"><code><span class="p">{</span><span class="w"> </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"madome"</span><span class="w">
-</span><span class="p">,</span><span class="w"> </span><span class="nl">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"user@madome.app"</span><span class="w">
-</span><span class="p">,</span><span class="w"> </span><span class="nl">"role"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="c1">// default</span><span class="w">
+<div class="highlight"><pre class="highlight json-doc"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"madome"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"user@madome.app"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"role"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="c1">// default</span><span class="w">
+</span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <p>사용자를 생성해요.</p>
 <h3 id='http-request-2'>HTTP Request</h3>
@@ -673,48 +694,48 @@ Set-Cookie: madome_refresh_token=REFRESH_TOKEN; \
 <div class="highlight"><pre class="highlight json-doc"><code><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
         </span><span class="nl">"kind"</span><span class="p">:</span><span class="w"> </span><span class="s2">"book"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"book_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">123451</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1e441e4d-f065-4f30-8c59-7e725f18ecf0"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2022-02-10T14:59:06.656643Z"</span><span class="w">
+        </span><span class="nl">"book_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">423144</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"afb00e2c-cbd6-4ba7-8d5b-7233f87a4d44"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2022-02-11T11:53:57.496082Z"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="p">{</span><span class="w">
         </span><span class="nl">"kind"</span><span class="p">:</span><span class="w"> </span><span class="s2">"book"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"book_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">123452</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1e441e4d-f065-4f30-8c59-7e725f18ecf0"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2022-02-10T14:59:16.698506Z"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-        </span><span class="nl">"kind"</span><span class="p">:</span><span class="w"> </span><span class="s2">"book_tag"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"tag_kind"</span><span class="p">:</span><span class="w"> </span><span class="s2">"female"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"tag_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"netorare"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1e441e4d-f065-4f30-8c59-7e725f18ecf0"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2022-02-10T16:20:20.060132Z"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-        </span><span class="nl">"kind"</span><span class="p">:</span><span class="w"> </span><span class="s2">"book_tag"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"tag_kind"</span><span class="p">:</span><span class="w"> </span><span class="s2">"female"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"tag_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rape"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1e441e4d-f065-4f30-8c59-7e725f18ecf0"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2022-02-11T11:53:43.908101Z"</span><span class="w">
+        </span><span class="nl">"book_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">42314</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"afb00e2c-cbd6-4ba7-8d5b-7233f87a4d44"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2022-02-11T11:53:55.453460Z"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="p">{</span><span class="w">
         </span><span class="nl">"kind"</span><span class="p">:</span><span class="w"> </span><span class="s2">"book_tag"</span><span class="p">,</span><span class="w">
         </span><span class="nl">"tag_kind"</span><span class="p">:</span><span class="w"> </span><span class="s2">"female"</span><span class="p">,</span><span class="w">
         </span><span class="nl">"tag_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"loli"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1e441e4d-f065-4f30-8c59-7e725f18ecf0"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"afb00e2c-cbd6-4ba7-8d5b-7233f87a4d44"</span><span class="p">,</span><span class="w">
         </span><span class="nl">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2022-02-11T11:53:50.429997Z"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="p">{</span><span class="w">
-        </span><span class="nl">"kind"</span><span class="p">:</span><span class="w"> </span><span class="s2">"book"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"book_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">42314</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1e441e4d-f065-4f30-8c59-7e725f18ecf0"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2022-02-11T11:53:55.453460Z"</span><span class="w">
+        </span><span class="nl">"kind"</span><span class="p">:</span><span class="w"> </span><span class="s2">"book_tag"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"tag_kind"</span><span class="p">:</span><span class="w"> </span><span class="s2">"female"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"tag_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rape"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"afb00e2c-cbd6-4ba7-8d5b-7233f87a4d44"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2022-02-11T11:53:43.908101Z"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"kind"</span><span class="p">:</span><span class="w"> </span><span class="s2">"book_tag"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"tag_kind"</span><span class="p">:</span><span class="w"> </span><span class="s2">"female"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"tag_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"netorare"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"afb00e2c-cbd6-4ba7-8d5b-7233f87a4d44"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2022-02-10T16:20:20.060132Z"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="p">{</span><span class="w">
         </span><span class="nl">"kind"</span><span class="p">:</span><span class="w"> </span><span class="s2">"book"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"book_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">423144</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1e441e4d-f065-4f30-8c59-7e725f18ecf0"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2022-02-11T11:53:57.496082Z"</span><span class="w">
+        </span><span class="nl">"book_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">123452</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"afb00e2c-cbd6-4ba7-8d5b-7233f87a4d44"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2022-02-10T14:59:16.698506Z"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"kind"</span><span class="p">:</span><span class="w"> </span><span class="s2">"book"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"book_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">123451</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"afb00e2c-cbd6-4ba7-8d5b-7233f87a4d44"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2022-02-10T14:59:06.656643Z"</span><span class="w">
     </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></code></pre></div>
@@ -726,26 +747,31 @@ Set-Cookie: madome_refresh_token=REFRESH_TOKEN; \
 <tr>
 <th>Parameter</th>
 <th>Description</th>
+<th>Value</th>
 <th>Default</th>
 </tr>
 </thead><tbody>
 <tr>
 <td>offset</td>
+<td>가져올 개수</td>
 <td><code>1 ~ 100</code></td>
 <td><code>25</code></td>
 </tr>
 <tr>
 <td>page</td>
-<td><code>1 이상</code></td>
+<td>페이지</td>
+<td><code>1 ~</code></td>
 <td><code>1</code></td>
 </tr>
 <tr>
 <td>sort-by</td>
+<td>정렬 방법</td>
 <td><code>created-at-desc</code>, <code>created-at-asc</code>, <code>random</code></td>
 <td><code>created-at-desc</code></td>
 </tr>
 <tr>
 <td>kind</td>
+<td><code>Like</code>의 종류</td>
 <td><code>book</code>, <code>book_tag</code></td>
 <td><code>null</code></td>
 </tr>
@@ -789,15 +815,18 @@ Set-Cookie: madome_refresh_token=REFRESH_TOKEN; \
 <tr>
 <th>Parameter</th>
 <th>Description</th>
+<th>Value</th>
 </tr>
 </thead><tbody>
 <tr>
 <td>kind</td>
+<td><code>Like</code>의 종류</td>
 <td><code>book</code></td>
 </tr>
 <tr>
 <td>book_id</td>
 <td>책 ID</td>
+<td><code>0 ~</code></td>
 </tr>
 </tbody></table>
 <h4 id='book-tag'>Book Tag</h4>
@@ -805,19 +834,23 @@ Set-Cookie: madome_refresh_token=REFRESH_TOKEN; \
 <tr>
 <th>Parameter</th>
 <th>Description</th>
+<th>Value</th>
 </tr>
 </thead><tbody>
 <tr>
 <td>kind</td>
+<td><code>Like</code>의 종류</td>
 <td><code>book_tag</code></td>
 </tr>
 <tr>
 <td>tag_kind</td>
-<td>책 태그의 종류</td>
+<td>태그의 종류</td>
+<td><code>string</code></td>
 </tr>
 <tr>
 <td>tag_name</td>
 <td>태그의 이름</td>
+<td><code>string</code></td>
 </tr>
 </tbody></table>
 <h3 id='http-response-2'>HTTP Response</h3>
@@ -863,15 +896,18 @@ Set-Cookie: madome_refresh_token=REFRESH_TOKEN; \
 <tr>
 <th>Parameter</th>
 <th>Description</th>
+<th>Value</th>
 </tr>
 </thead><tbody>
 <tr>
 <td>kind</td>
+<td><code>Like</code>의 종류</td>
 <td><code>book</code></td>
 </tr>
 <tr>
 <td>book_id</td>
 <td>책 ID</td>
+<td><code>0 ~</code></td>
 </tr>
 </tbody></table>
 <h4 id='book-tag-2'>Book Tag</h4>
@@ -879,19 +915,23 @@ Set-Cookie: madome_refresh_token=REFRESH_TOKEN; \
 <tr>
 <th>Parameter</th>
 <th>Description</th>
+<th>Value</th>
 </tr>
 </thead><tbody>
 <tr>
 <td>kind</td>
+<td><code>Like</code>의 종류</td>
 <td><code>book_tag</code></td>
 </tr>
 <tr>
 <td>tag_kind</td>
-<td>책 태그의 종류</td>
+<td>태그의 종류</td>
+<td><code>string</code></td>
 </tr>
 <tr>
 <td>tag_name</td>
 <td>태그의 이름</td>
+<td><code>string</code></td>
 </tr>
 </tbody></table>
 <h3 id='http-response-3'>HTTP Response</h3>
@@ -908,6 +948,106 @@ Set-Cookie: madome_refresh_token=REFRESH_TOKEN; \
 <tr>
 <td>404</td>
 <td>없어요.</td>
+</tr>
+</tbody></table>
+<h1 id='notification'>Notification</h1><h2 id='get-notifications'>Get Notifications</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="se">\</span>
+    <span class="nt">-X</span> GET <span class="se">\</span>
+    <span class="s2">"/users/@me/notifications"</span>
+</code></pre></div>
+<blockquote>
+<p>Returns JSON</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"kind"</span><span class="p">:</span><span class="w"> </span><span class="s2">"book"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"book_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">123458</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"book_tags"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">[</span><span class="w">
+                </span><span class="s2">"female"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"anal"</span><span class="w">
+            </span><span class="p">]</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="nl">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2022-02-14T11:32:27.485749Z"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"kind"</span><span class="p">:</span><span class="w"> </span><span class="s2">"book"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"book_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">123452</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"book_tags"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">[</span><span class="w">
+                </span><span class="s2">"female"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"large insertions"</span><span class="w">
+            </span><span class="p">],</span><span class="w">
+            </span><span class="p">[</span><span class="w">
+                </span><span class="s2">"female"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"anal"</span><span class="w">
+            </span><span class="p">]</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="nl">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2022-02-14T09:13:14.591283Z"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"kind"</span><span class="p">:</span><span class="w"> </span><span class="s2">"book"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"book_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">123456</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"book_tags"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">[</span><span class="w">
+                </span><span class="s2">"female"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"loli"</span><span class="w">
+            </span><span class="p">],</span><span class="w">
+            </span><span class="p">[</span><span class="w">
+                </span><span class="s2">"female"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"rape"</span><span class="w">
+            </span><span class="p">]</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="nl">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2022-02-14T09:13:14.591272Z"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre></div>
+<p>아직은 <code>kind</code>가 하나밖에 존재하지 않아요.</p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code>GET /users/@me/notifications</code></p>
+<h3 id='query-parameters'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th>Value</th>
+<th>Default</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>kind</td>
+<td>알림의 종류</td>
+<td><code>book</code></td>
+<td><code>null</code></td>
+</tr>
+<tr>
+<td>sort-by</td>
+<td>정렬 방법</td>
+<td><code>created-at-desc</code>, <code>created-at-asc</code></td>
+<td><code>created-at-desc</code></td>
+</tr>
+<tr>
+<td>offset</td>
+<td>가져올 개수</td>
+<td><code>1 ~ 100</code></td>
+<td><code>25</code></td>
+</tr>
+<tr>
+<td>page</td>
+<td>페이지</td>
+<td><code>1 ~</code></td>
+<td><code>1</code></td>
+</tr>
+</tbody></table>
+<h3 id='http-response'>HTTP Response</h3>
+<table><thead>
+<tr>
+<th>Code</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>200</td>
+<td>성공</td>
 </tr>
 </tbody></table>
 
