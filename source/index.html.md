@@ -33,8 +33,16 @@ curl "api_endpoint_here" \
 
 요청하려는 API 설명에 토큰 미포함에 대한 설명이 있지 않으면 토큰을 포함해서 요청을 보내면 돼요.
 
-아래 이미지는 서버에서 자동으로 이루어지는 `Check and Refresh Token`에 대한 순서도예요.
+토큰은 `HTTP Cookie`를 통해 관리되고, 토큰 인증 및 재발급은 인증이 필요한 API 엔드포인트에서 처리해요.
 
-클라이언트에서는 토큰 관리에 대해서는 신경쓰지 않아도 돼요.
+클라이언트는 요청을 보낼 때마다 `HTTP Cookie`에 토큰을 포함시키기만 하면 된다는 말이에요.
+
+아래 이미지는 인증 서버에서 실행되는 `Check and Refresh Token`에 대한 순서도예요.
 
 ![auth-flowchart](auth-flowchart.svg)
+
+# Naming rules
+
+`Url`에 포함된 데이터들(e.g. querystring)는 `kebab-case`를 사용해요.
+
+`Body`를 통해 오고 가는 데이터들은 `snake_case`를 사용해요.
