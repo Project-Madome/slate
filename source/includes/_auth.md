@@ -18,6 +18,8 @@ curl \
 }
 ```
 
+> Returns Nothing
+
 `Authcode`를 생성하고, 생성된 `Authcode`를 주어진 이메일에 전송해요.
 
 <aside class="notice">

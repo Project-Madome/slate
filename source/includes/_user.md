@@ -53,6 +53,8 @@ curl \
 }
 ```
 
+> Returns Nothing
+
 사용자를 생성해요.
 
 ### HTTP Request
@@ -74,3 +76,31 @@ Code | Description |
 201  | 사용자를 생성했어요. |
 400  | 잘못된 요청이에요. 다시 한번 확인해줄래요? |
 409  | 이미 존재하는 사용자예요. |
+
+## Create or Update Fcm Token
+
+```shell
+curl \
+    -X POST \
+    -d '{ "udid": "b99a9fc0-568c-4b85-bec2-1271ed6f8bd7", "fcm_token": "YOUR_FCM_REGISTRATION_TOKEN" }' \
+    "/users/@me/fcm-token"
+```
+
+> Returns Nothing
+
+### HTTP Request
+
+`POST /users/@me/fcm-token`
+
+### Body Parameters
+
+Parameter | Description | Value |
+--------- | ----------- | ----- |
+udid | 기기의 고유 식별자 | `uuid` |
+fcm_token | firebase cloud messaging 토큰 |  |
+
+### HTTP Response
+
+Code | Description |
+---- | ----------- |
+201 | 생성 또는 갱신에 성공함 |
