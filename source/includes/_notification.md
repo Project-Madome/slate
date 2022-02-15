@@ -68,7 +68,7 @@ Parameter | Description | Value | Default |
 --------- | ----------- | ----- | ------- |
 kind | 알림의 종류 | `book` | `null` |
 sort-by | 정렬 방법 | `created-at-desc`, `created-at-asc` | `created-at-desc` |
-offset | 가져올 개수 | `1 ~ 100` | `25` |
+per-page | 가져올 개수 | `1 ~ 100` | `25` |
 page | 페이지 | `1 ~` | `1` |
 
 ### HTTP Response
