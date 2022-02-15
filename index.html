@@ -340,6 +340,9 @@
                   <li>
                     <a href="#create-user" class="toc-h2 toc-link" data-title="Create User">Create User</a>
                   </li>
+                  <li>
+                    <a href="#create-or-update-fcm-token" class="toc-h2 toc-link" data-title="Create or Update Fcm Token">Create or Update Fcm Token</a>
+                  </li>
               </ul>
           </li>
           <li>
@@ -428,6 +431,10 @@
     </span><span class="nl">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"user@madome.app"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
+<blockquote>
+<p>Returns Nothing</p>
+</blockquote>
+
 <p><code>Authcode</code>를 생성하고, 생성된 <code>Authcode</code>를 주어진 이메일에 전송해요.</p>
 
 <aside class="notice">
@@ -637,6 +644,10 @@ Set-Cookie: madome_refresh_token=REFRESH_TOKEN;
     </span><span class="nl">"role"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="c1">// default</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
+<blockquote>
+<p>Returns Nothing</p>
+</blockquote>
+
 <p>사용자를 생성해요.</p>
 <h3 id='http-request-2'>HTTP Request</h3>
 <p><code>GET http://example.com/kittens/&lt;ID&gt;</code></p>
@@ -682,6 +693,47 @@ Set-Cookie: madome_refresh_token=REFRESH_TOKEN;
 <tr>
 <td>409</td>
 <td>이미 존재하는 사용자예요.</td>
+</tr>
+</tbody></table>
+<h2 id='create-or-update-fcm-token'>Create or Update Fcm Token</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="se">\</span>
+    <span class="nt">-X</span> POST <span class="se">\</span>
+    <span class="nt">-d</span> <span class="s1">'{ "udid": "b99a9fc0-568c-4b85-bec2-1271ed6f8bd7", "fcm_token": "YOUR_FCM_REGISTRATION_TOKEN" }'</span> <span class="se">\</span>
+    <span class="s2">"/users/@me/fcm-token"</span>
+</code></pre></div>
+<blockquote>
+<p>Returns Nothing</p>
+</blockquote>
+<h3 id='http-request-3'>HTTP Request</h3>
+<p><code>POST /users/@me/fcm-token</code></p>
+<h3 id='body-parameters-2'>Body Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th>Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>udid</td>
+<td>기기의 고유 식별자</td>
+<td><code>uuid</code></td>
+</tr>
+<tr>
+<td>fcm_token</td>
+<td>firebase cloud messaging 토큰</td>
+<td></td>
+</tr>
+</tbody></table>
+<h3 id='http-response-3'>HTTP Response</h3>
+<table><thead>
+<tr>
+<th>Code</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>201</td>
+<td>생성 또는 갱신에 성공함</td>
 </tr>
 </tbody></table>
 <h1 id='like'>Like</h1><h2 id='get-likes'>Get Likes</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="se">\</span>
