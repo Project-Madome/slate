@@ -15,46 +15,39 @@ curl \
     {
         "kind": "book",
         "book_id": 423144,
-        "user_id": "afb00e2c-cbd6-4ba7-8d5b-7233f87a4d44",
         "created_at": "2022-02-11T11:53:57.496082Z"
     },
     {
         "kind": "book",
         "book_id": 42314,
-        "user_id": "afb00e2c-cbd6-4ba7-8d5b-7233f87a4d44",
         "created_at": "2022-02-11T11:53:55.453460Z"
     },
     {
         "kind": "book_tag",
         "tag_kind": "female",
         "tag_name": "loli",
-        "user_id": "afb00e2c-cbd6-4ba7-8d5b-7233f87a4d44",
         "created_at": "2022-02-11T11:53:50.429997Z"
     },
     {
         "kind": "book_tag",
         "tag_kind": "female",
         "tag_name": "rape",
-        "user_id": "afb00e2c-cbd6-4ba7-8d5b-7233f87a4d44",
         "created_at": "2022-02-11T11:53:43.908101Z"
     },
     {
         "kind": "book_tag",
         "tag_kind": "female",
         "tag_name": "netorare",
-        "user_id": "afb00e2c-cbd6-4ba7-8d5b-7233f87a4d44",
         "created_at": "2022-02-10T16:20:20.060132Z"
     },
     {
         "kind": "book",
         "book_id": 123452,
-        "user_id": "afb00e2c-cbd6-4ba7-8d5b-7233f87a4d44",
         "created_at": "2022-02-10T14:59:16.698506Z"
     },
     {
         "kind": "book",
         "book_id": 123451,
-        "user_id": "afb00e2c-cbd6-4ba7-8d5b-7233f87a4d44",
         "created_at": "2022-02-10T14:59:06.656643Z"
     }
 ]
