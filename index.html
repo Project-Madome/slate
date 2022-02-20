@@ -601,9 +601,9 @@ Set-Cookie: madome_refresh_token=REFRESH_TOKEN;
     <span class="s2">"/auth/token
 </span></code></pre></div>
 <blockquote>
-<p>If refreshed, Returns Set-Cookie to HTTP Headers
-<code>text
-Set-Cookie: madome_access_token=ACCESS_TOKEN;
+<p>If refreshed, Returns Set-Cookie to HTTP Headers</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>Set-Cookie: madome_access_token=ACCESS_TOKEN;
             Domain=madome.app;
             Max-Age=604800;
             Path=/;
@@ -615,9 +615,14 @@ Set-Cookie: madome_refresh_token=REFRESH_TOKEN;
             Path=/;
             Secure;
             HttpOnly;
-</code></p>
+</code></pre></div>
+<blockquote>
+<p>Returns JSON</p>
 </blockquote>
-<h3 id='http-request-4'>HTTP Request</h3>
+<div class="highlight"><pre class="highlight json-doc"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1e441e4d-f065-4f30-8c59-7e725f18ecf0"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h3 id='http-request-4'>HTTP Request</h3>
 <p><code>PATCH /auth/token</code></p>
 <h3 id='query-parameters-2'>Query Parameters</h3>
 <table><thead>
