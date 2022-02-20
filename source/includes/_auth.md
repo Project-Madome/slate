@@ -149,6 +149,7 @@ curl \
 ```
 
 > If refreshed, Returns Set-Cookie to HTTP Headers
+
 ```text
 Set-Cookie: madome_access_token=ACCESS_TOKEN;
             Domain=madome.app;
@@ -162,6 +163,14 @@ Set-Cookie: madome_refresh_token=REFRESH_TOKEN;
             Path=/;
             Secure;
             HttpOnly;
+```
+
+> Returns JSON
+
+```jsonc
+{
+    "user_id": "1e441e4d-f065-4f30-8c59-7e725f18ecf0"
+}
 ```
 
 ### HTTP Request
