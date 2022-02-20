@@ -329,6 +329,9 @@
                   <li>
                     <a href="#check-access-token" class="toc-h2 toc-link" data-title="Check Access Token">Check Access Token</a>
                   </li>
+                  <li>
+                    <a href="#check-and-refresh-token-pair" class="toc-h2 toc-link" data-title="Check and Refresh Token Pair">Check and Refresh Token Pair</a>
+                  </li>
               </ul>
           </li>
           <li>
@@ -593,8 +596,65 @@ Set-Cookie: madome_refresh_token=REFRESH_TOKEN;
 <td>권한이 부족해요.</td>
 </tr>
 </tbody></table>
-
-<!-- ## Check and Refresh Token Pair -->
+<h2 id='check-and-refresh-token-pair'>Check and Refresh Token Pair</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="se">\</span>
+    <span class="nt">-X</span> GET <span class="se">\</span>
+    <span class="s2">"/auth/token
+</span></code></pre></div>
+<blockquote>
+<p>If refreshed, Returns Set-Cookie to HTTP Headers
+<code>text
+Set-Cookie: madome_access_token=ACCESS_TOKEN;
+            Domain=madome.app;
+            Max-Age=604800;
+            Path=/;
+            Secure;
+            HttpOnly;
+Set-Cookie: madome_refresh_token=REFRESH_TOKEN;
+            Domain=madome.app;
+            Max-Age=604800;
+            Path=/;
+            Secure;
+            HttpOnly;
+</code></p>
+</blockquote>
+<h3 id='http-request-4'>HTTP Request</h3>
+<p><code>PATCH /auth/token</code></p>
+<h3 id='query-parameters-2'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th>Value</th>
+<th>Default</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>role</td>
+<td>인증에 필요한 최소 권한</td>
+<td><code>0 ~ 1</code></td>
+<td><code>0</code></td>
+</tr>
+</tbody></table>
+<h3 id='http-response-4'>HTTP Response</h3>
+<table><thead>
+<tr>
+<th>Code</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>200</td>
+<td>인증 성공했어요.</td>
+</tr>
+<tr>
+<td>401</td>
+<td><code>Access Token</code>이 유효하지 않아요.</td>
+</tr>
+<tr>
+<td>403</td>
+<td>권한이 부족해요.</td>
+</tr>
+</tbody></table>
 <h1 id='user'>User</h1><h2 id='get-me'>Get Me</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">-X</span> GET <span class="se">\</span>
     <span class="s2">"/users/@me"</span>
 </code></pre></div>
