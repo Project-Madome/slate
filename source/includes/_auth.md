@@ -140,4 +140,44 @@ Code | Description |
 401  | `Access Token`이 유효하지 않아요. |
 403  | 권한이 부족해요. |
 
-<!-- ## Check and Refresh Token Pair -->
+## Check and Refresh Token Pair
+
+```shell
+curl \
+    -X GET \
+    "/auth/token
+```
+
+> If refreshed, Returns Set-Cookie to HTTP Headers
+```text
+Set-Cookie: madome_access_token=ACCESS_TOKEN;
+            Domain=madome.app;
+            Max-Age=604800;
+            Path=/;
+            Secure;
+            HttpOnly;
+Set-Cookie: madome_refresh_token=REFRESH_TOKEN;
+            Domain=madome.app;
+            Max-Age=604800;
+            Path=/;
+            Secure;
+            HttpOnly;
+```
+
+### HTTP Request
+
+`PATCH /auth/token`
+
+### Query Parameters
+
+Parameter | Description | Value | Default |
+--------- | ----------- | ----- | ------- |
+role | 인증에 필요한 최소 권한 | `0 ~ 1` | `0` |
+
+### HTTP Response
+
+Code | Description |
+---- | ----------- |
+200  | 인증 성공했어요. |
+401  | `Access Token`이 유효하지 않아요. |
+403  | 권한이 부족해요. |
