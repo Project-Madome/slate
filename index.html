@@ -315,6 +315,9 @@
             <a href="#naming-rules" class="toc-h1 toc-link" data-title="Naming rules">Naming rules</a>
           </li>
           <li>
+            <a href="#querystring-parser" class="toc-h1 toc-link" data-title="Querystring parser">Querystring parser</a>
+          </li>
+          <li>
             <a href="#errors" class="toc-h1 toc-link" data-title="Errors">Errors</a>
           </li>
           <li>
@@ -370,6 +373,49 @@
                   </li>
               </ul>
           </li>
+          <li>
+            <a href="#history" class="toc-h1 toc-link" data-title="History">History</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#create-or-update-history" class="toc-h2 toc-link" data-title="Create or Update History">Create or Update History</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#library" class="toc-h1 toc-link" data-title="Library">Library</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#about-tags" class="toc-h2 toc-link" data-title="About Tags">About Tags</a>
+                  </li>
+                  <li>
+                    <a href="#add-book" class="toc-h2 toc-link" data-title="Add Book">Add Book</a>
+                  </li>
+                  <li>
+                    <a href="#get-book-by-id" class="toc-h2 toc-link" data-title="Get Book By Id">Get Book By Id</a>
+                  </li>
+                  <li>
+                    <a href="#get-books" class="toc-h2 toc-link" data-title="Get Books">Get Books</a>
+                  </li>
+                  <li>
+                    <a href="#get-books-by-ids" class="toc-h2 toc-link" data-title="Get Books By Ids">Get Books By Ids</a>
+                  </li>
+                  <li>
+                    <a href="#get-books-by-tags" class="toc-h2 toc-link" data-title="Get Books By Tags">Get Books By Tags</a>
+                  </li>
+                  <li>
+                    <a href="#get-book-image-list" class="toc-h2 toc-link" data-title="Get Book Image List">Get Book Image List</a>
+                  </li>
+                  <li>
+                    <a href="#get-book-image" class="toc-h2 toc-link" data-title="Get Book Image">Get Book Image</a>
+                  </li>
+                  <li>
+                    <a href="#search-books" class="toc-h2 toc-link" data-title="Search Books">Search Books</a>
+                  </li>
+                  <li>
+                    <a href="#search-books-query-completion" class="toc-h2 toc-link" data-title="Search Books Query Completion">Search Books Query Completion</a>
+                  </li>
+              </ul>
+          </li>
       </ul>
         <ul class="toc-footer">
             <li><a href='https://github.com/Project-Madome/slate'>Documentation Powered by Slate</a></li>
@@ -397,6 +443,8 @@
 <p><code>Url</code>에 포함된 데이터들(e.g. querystring)는 <code>kebab-case</code>를 사용해요.</p>
 
 <p><code>Body</code>를 통해 오고 가는 데이터들은 <code>snake_case</code>를 사용해요.</p>
+<h1 id='querystring-parser'>Querystring parser</h1>
+<p><a href="https://www.npmjs.com/package/qs">qs</a>를 사용하고 있어요.</p>
 <h1 id='errors'>Errors</h1>
 <table><thead>
 <tr>
@@ -715,28 +763,32 @@ Set-Cookie: madome_refresh_token=REFRESH_TOKEN;
 
 <p>사용자를 생성해요.</p>
 <h3 id='http-request-2'>HTTP Request</h3>
-<p><code>GET http://example.com/kittens/&lt;ID&gt;</code></p>
+<p><code>POST /users</code></p>
 <h3 id='body-parameters'>Body Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
 <th>Description</th>
+<th>Value</th>
 <th>Required</th>
 </tr>
 </thead><tbody>
 <tr>
 <td>name</td>
-<td>사용자의 이름. 서버에서 유일해야해요. 이름의 길이는 <code>1 ~ 20</code> 이에요</td>
+<td>사용자의 이름</td>
+<td>길이 <code>1 ~ 20</code></td>
 <td>O</td>
 </tr>
 <tr>
 <td>email</td>
-<td>사용자의 메일주소. 서버에서 유일해야해요. 이메일이어야 해요</td>
+<td>사용자의 메일주소</td>
+<td>이메일</td>
 <td>O</td>
 </tr>
 <tr>
 <td>role</td>
-<td>사용자의 권한. 현재는 <code>0 ~ 1</code> 까지만 존재해요.</td>
+<td>사용자의 권한</td>
+<td><code>0 ~ 1</code></td>
 <td>X</td>
 </tr>
 </tbody></table>
@@ -750,10 +802,6 @@ Set-Cookie: madome_refresh_token=REFRESH_TOKEN;
 <tr>
 <td>201</td>
 <td>사용자를 생성했어요.</td>
-</tr>
-<tr>
-<td>400</td>
-<td>잘못된 요청이에요. 다시 한번 확인해줄래요?</td>
 </tr>
 <tr>
 <td>409</td>
@@ -812,44 +860,21 @@ Set-Cookie: madome_refresh_token=REFRESH_TOKEN;
     </span><span class="p">{</span><span class="w">
         </span><span class="nl">"kind"</span><span class="p">:</span><span class="w"> </span><span class="s2">"book"</span><span class="p">,</span><span class="w">
         </span><span class="nl">"book_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">423144</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2022-02-11T11:53:57.496082Z"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-        </span><span class="nl">"kind"</span><span class="p">:</span><span class="w"> </span><span class="s2">"book"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"book_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">42314</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2022-02-11T11:53:55.453460Z"</span><span class="w">
+        </span><span class="nl">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2022-02-11T11:53:57.496082Z"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"book"</span><span class="p">:</span><span class="w"> </span><span class="err">Book</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="p">{</span><span class="w">
         </span><span class="nl">"kind"</span><span class="p">:</span><span class="w"> </span><span class="s2">"book_tag"</span><span class="p">,</span><span class="w">
         </span><span class="nl">"tag_kind"</span><span class="p">:</span><span class="w"> </span><span class="s2">"female"</span><span class="p">,</span><span class="w">
         </span><span class="nl">"tag_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"loli"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2022-02-11T11:53:50.429997Z"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-        </span><span class="nl">"kind"</span><span class="p">:</span><span class="w"> </span><span class="s2">"book_tag"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"tag_kind"</span><span class="p">:</span><span class="w"> </span><span class="s2">"female"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"tag_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rape"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2022-02-11T11:53:43.908101Z"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-        </span><span class="nl">"kind"</span><span class="p">:</span><span class="w"> </span><span class="s2">"book_tag"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"tag_kind"</span><span class="p">:</span><span class="w"> </span><span class="s2">"female"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"tag_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"netorare"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2022-02-10T16:20:20.060132Z"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-        </span><span class="nl">"kind"</span><span class="p">:</span><span class="w"> </span><span class="s2">"book"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"book_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">123452</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2022-02-10T14:59:16.698506Z"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-        </span><span class="nl">"kind"</span><span class="p">:</span><span class="w"> </span><span class="s2">"book"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"book_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">123451</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2022-02-10T14:59:06.656643Z"</span><span class="w">
+        </span><span class="nl">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2022-02-11T11:53:50.429997Z"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"books"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="err">Book</span><span class="p">,</span><span class="w"> </span><span class="err">Book</span><span class="p">,</span><span class="w"> </span><span class="err">Book</span><span class="p">]</span><span class="w">
     </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></code></pre></div>
 <p>사용자가 좋아요한 것들을 가져와요.</p>
+
+<p>books의 per-page는 3, page는 1이에요</p>
 <h3 id='http-request'>HTTP Request</h3>
 <p><code>GET /users/@me/likes</code></p>
 <h3 id='query-parameters'>Query Parameters</h3>
@@ -912,7 +937,7 @@ Set-Cookie: madome_refresh_token=REFRESH_TOKEN;
 </blockquote>
 <div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="se">\</span>
     <span class="nt">-X</span> POST <span class="se">\</span>
-    <span class="nt">-d</span> <span class="s1">'{ "kind": "book", "tag_kind": "female", "tag_name": "loli" }'</span> <span class="se">\</span>
+    <span class="nt">-d</span> <span class="s1">'{ "kind": "book_tag", "tag_kind": "female", "tag_name": "loli" }'</span> <span class="se">\</span>
     <span class="s2">"/users/@me/likes"</span>
 </code></pre></div>
 <blockquote>
@@ -1158,6 +1183,656 @@ Set-Cookie: madome_refresh_token=REFRESH_TOKEN;
 <tr>
 <td>200</td>
 <td>성공</td>
+</tr>
+</tbody></table>
+<h1 id='history'>History</h1><h2 id='create-or-update-history'>Create or Update History</h2><h1 id='library'>Library</h1><h2 id='about-tags'>About Tags</h2>
+<p>태그는 <code>[kind, name]</code>와 같이 tuple로 이루어져 있으며,<code>[female, double penetration]</code> 또는 <code>[artist, nunnu]</code> 와 같이 사용합니다.</p>
+
+<p>URL에 사용해야 하는 경우에는 <code>kind-name</code>와 같이 사용하면 되며, <code>female-double-penetration</code> 또는 <code>artist-nunnu</code> 와 같이 사용합니다.</p>
+<h3 id='tag-kind'>Tag Kind</h3>
+<ul>
+<li><code>artist</code></li>
+<li><code>series</code></li>
+<li><code>group</code></li>
+<li><code>female</code></li>
+<li><code>male</code></li>
+<li><code>misc</code></li>
+</ul>
+<h2 id='add-book'>Add Book</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="se">\</span>
+    <span class="nt">-X</span> POST <span class="se">\</span>
+    <span class="nt">-d</span> <span class="s1">'{
+            "id": 1242676,
+            "title": "Soreike! Pan Koujou! - Go for it! the Bread factory! | 나가자! 빵공장!",
+            "kind": "manga",
+            "page": 21,
+            "language": "korean",
+            "tags": [
+                ["artist", "nunnu"],
+                ["female", "anal"],
+                ["female", "bondage"],
+                ["female", "machine"],
+                ["female", "double penetration"],
+                ["female", "sole female"],
+                ["female", "tickling"],
+                ["female", "schoolgirl uniform"],
+            ],
+            "created_at": "2022-01-31T17:12:00.000Z"
+        }'</span> <span class="se">\</span>
+    <span class="s2">"/books"</span>
+</code></pre></div>
+<blockquote>
+<p>Returns Nothing</p>
+</blockquote>
+
+<p>작품을 업로드해요.</p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code>POST /books</code></p>
+<h3 id='body-parameters'>Body Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th>Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>작품 번호</td>
+<td><code>1 ~</code></td>
+</tr>
+<tr>
+<td>title</td>
+<td>작품 제목</td>
+<td><code>string</code></td>
+</tr>
+<tr>
+<td>kind</td>
+<td>작품 종류</td>
+<td><code>doujinshi</code>, <code>manga</code>, <code>artist_cg</code>, <code>game_cg</code></td>
+</tr>
+<tr>
+<td>page</td>
+<td>작품 분량</td>
+<td><code>1 ~</code></td>
+</tr>
+<tr>
+<td>tags</td>
+<td>작품 태그</td>
+<td><code>List&lt;Tag&gt;</code></td>
+</tr>
+<tr>
+<td>created_at</td>
+<td>작품 생성 시간</td>
+<td><code>timestamp ms</code>, <code>iso8601</code>, <code>rfc2822</code></td>
+</tr>
+</tbody></table>
+<h3 id='http-response'>HTTP Response</h3>
+<table><thead>
+<tr>
+<th>Code</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>201</td>
+<td>성공했어요.</td>
+</tr>
+<tr>
+<td>409</td>
+<td>이미 있어요.</td>
+</tr>
+</tbody></table>
+<h2 id='get-book-by-id'>Get Book By Id</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="se">\</span>
+    <span class="nt">-X</span> GET <span class="se">\</span>
+    /books/1242676
+</code></pre></div>
+<blockquote>
+<p>Returns JSON</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json-doc"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1242676</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Soreike! Pan Koujou! - Go for it! the Bread factory! | 나가자! 빵공장!"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"kind"</span><span class="p">:</span><span class="w"> </span><span class="s2">"manga"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"language"</span><span class="p">:</span><span class="w"> </span><span class="s2">"한국어"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"page"</span><span class="p">:</span><span class="w"> </span><span class="mi">21</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"tags"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">[</span><span class="s2">"artist"</span><span class="p">,</span><span class="w"> </span><span class="s2">"nunnu"</span><span class="p">],</span><span class="w">
+        </span><span class="p">[</span><span class="s2">"female"</span><span class="p">,</span><span class="w"> </span><span class="s2">"anal"</span><span class="p">],</span><span class="w">
+        </span><span class="p">[</span><span class="s2">"female"</span><span class="p">,</span><span class="w"> </span><span class="s2">"bondage"</span><span class="p">],</span><span class="w">
+        </span><span class="p">[</span><span class="s2">"female"</span><span class="p">,</span><span class="w"> </span><span class="s2">"double penetration"</span><span class="p">],</span><span class="w">
+        </span><span class="p">[</span><span class="s2">"female"</span><span class="p">,</span><span class="w"> </span><span class="s2">"machine"</span><span class="p">],</span><span class="w">
+        </span><span class="p">[</span><span class="s2">"female"</span><span class="p">,</span><span class="w"> </span><span class="s2">"schoolgirl uniform"</span><span class="p">],</span><span class="w">
+        </span><span class="p">[</span><span class="s2">"female"</span><span class="p">,</span><span class="w"> </span><span class="s2">"sole female"</span><span class="p">],</span><span class="w">
+        </span><span class="p">[</span><span class="s2">"female"</span><span class="p">,</span><span class="w"> </span><span class="s2">"tickling"</span><span class="p">]</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nl">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-06-23T06:07:00.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-06-23T06:07:00.000Z"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h3 id='http-request-2'>HTTP Request</h3>
+<p><code>GET /books/:book_id</code></p>
+<h3 id='url-parameters'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th>Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>book_id</td>
+<td>작품 번호</td>
+<td><code>1 ~</code></td>
+</tr>
+</tbody></table>
+<h3 id='http-response-2'>HTTP Response</h3>
+<table><thead>
+<tr>
+<th>Code</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>200</td>
+<td>가져오는데 성공함</td>
+</tr>
+<tr>
+<td>404</td>
+<td>작품이 없음</td>
+</tr>
+</tbody></table>
+<h2 id='get-books'>Get Books</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="se">\</span>
+    <span class="nt">-X</span> GET <span class="se">\</span>
+    /books?per-page<span class="o">=</span>2
+</code></pre></div>
+<blockquote>
+<p>Returns JSON</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json-doc"><code><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2128614</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Gifu to... Zenpen | 시아버님과... 전편"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"kind"</span><span class="p">:</span><span class="w"> </span><span class="s2">"manga"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"language"</span><span class="p">:</span><span class="w"> </span><span class="s2">"korean"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"page"</span><span class="p">:</span><span class="w"> </span><span class="mi">30</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"tags"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">[</span><span class="s2">"artist"</span><span class="p">,</span><span class="w"> </span><span class="s2">"rocket monkey"</span><span class="p">],</span><span class="w">
+            </span><span class="p">[</span><span class="s2">"female"</span><span class="p">,</span><span class="w"> </span><span class="s2">"anal"</span><span class="p">],</span><span class="w">
+            </span><span class="p">[</span><span class="s2">"female"</span><span class="p">,</span><span class="w"> </span><span class="s2">"anal intercourse"</span><span class="p">],</span><span class="w">
+            </span><span class="p">[</span><span class="s2">"female"</span><span class="p">,</span><span class="w"> </span><span class="s2">"beauty mark"</span><span class="p">],</span><span class="w">
+            </span><span class="p">[</span><span class="s2">"female"</span><span class="p">,</span><span class="w"> </span><span class="s2">"milf"</span><span class="p">],</span><span class="w">
+            </span><span class="p">[</span><span class="s2">"male"</span><span class="p">,</span><span class="w"> </span><span class="s2">"bald"</span><span class="p">],</span><span class="w">
+            </span><span class="p">[</span><span class="s2">"male"</span><span class="p">,</span><span class="w"> </span><span class="s2">"bbm"</span><span class="p">],</span><span class="w">
+            </span><span class="p">[</span><span class="s2">"male"</span><span class="p">,</span><span class="w"> </span><span class="s2">"sole male"</span><span class="p">]</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="nl">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2022-01-31T17:12:00.000Z"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2022-01-31T17:12:00.000Z"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2128532</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Kura | 곳간"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"kind"</span><span class="p">:</span><span class="w"> </span><span class="s2">"doujinshi"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"language"</span><span class="p">:</span><span class="w"> </span><span class="s2">"korean"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"page"</span><span class="p">:</span><span class="w"> </span><span class="mi">34</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"tags"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">[</span><span class="s2">"series"</span><span class="p">,</span><span class="w"> </span><span class="s2">"original"</span><span class="p">],</span><span class="w">
+            </span><span class="p">[</span><span class="s2">"female"</span><span class="p">,</span><span class="w"> </span><span class="s2">"eye-covering bang"</span><span class="p">],</span><span class="w">
+            </span><span class="p">[</span><span class="s2">"female"</span><span class="p">,</span><span class="w"> </span><span class="s2">"giantess"</span><span class="p">],</span><span class="w">
+            </span><span class="p">[</span><span class="s2">"female"</span><span class="p">,</span><span class="w"> </span><span class="s2">"sole female"</span><span class="p">],</span><span class="w">
+            </span><span class="p">[</span><span class="s2">"male"</span><span class="p">,</span><span class="w"> </span><span class="s2">"sole male"</span><span class="p">],</span><span class="w">
+            </span><span class="p">[</span><span class="s2">"misc"</span><span class="p">,</span><span class="w"> </span><span class="s2">"mosaic censorship"</span><span class="p">]</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="nl">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2022-01-31T15:59:00.000Z"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2022-01-31T15:59:00.000Z"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre></div><h3 id='http-request-3'>HTTP Request</h3>
+<p><code>GET /books</code></p>
+<h3 id='query-parameters'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th>Value</th>
+<th>Default</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>per-page</td>
+<td>per page</td>
+<td><code>1 ~ 100</code></td>
+<td><code>25</code></td>
+</tr>
+<tr>
+<td>page</td>
+<td>page</td>
+<td><code>1 ~</code></td>
+<td><code>1</code></td>
+</tr>
+<tr>
+<td>kind</td>
+<td>작품 종류</td>
+<td><code>doujinshi</code>, <code>manga</code>, <code>artist-cg</code>, <code>game-cg</code></td>
+<td>null</td>
+</tr>
+<tr>
+<td>sort-by</td>
+<td>정렬 방법</td>
+<td><code>id-desc</code>, <code>id-asc</code>, <code>random</code></td>
+<td><code>id-desc</code></td>
+</tr>
+</tbody></table>
+<h3 id='http-response-3'>HTTP Response</h3>
+<table><thead>
+<tr>
+<th>Code</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>200</td>
+<td>가져오는데 성공함</td>
+</tr>
+</tbody></table>
+<h2 id='get-books-by-ids'>Get Books By Ids</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="se">\</span>
+    <span class="nt">-X</span> GET <span class="se">\</span>
+    /books?ids[]<span class="o">=</span>1242676&amp;ids[]<span class="o">=</span>1918527
+</code></pre></div>
+<blockquote>
+<p>Returns JSON</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json-doc"><code><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1242676</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Soreike! Pan Koujou! - Go for it! the Bread factory! | 나가자! 빵공장!"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"kind"</span><span class="p">:</span><span class="w"> </span><span class="s2">"manga"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"language"</span><span class="p">:</span><span class="w"> </span><span class="s2">"한국어"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"page"</span><span class="p">:</span><span class="w"> </span><span class="mi">21</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"tags"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">[</span><span class="s2">"artist"</span><span class="p">,</span><span class="w"> </span><span class="s2">"nunnu"</span><span class="p">],</span><span class="w">
+            </span><span class="p">[</span><span class="s2">"female"</span><span class="p">,</span><span class="w"> </span><span class="s2">"anal"</span><span class="p">],</span><span class="w">
+            </span><span class="p">[</span><span class="s2">"female"</span><span class="p">,</span><span class="w"> </span><span class="s2">"bondage"</span><span class="p">],</span><span class="w">
+            </span><span class="p">[</span><span class="s2">"female"</span><span class="p">,</span><span class="w"> </span><span class="s2">"double penetration"</span><span class="p">],</span><span class="w">
+            </span><span class="p">[</span><span class="s2">"female"</span><span class="p">,</span><span class="w"> </span><span class="s2">"machine"</span><span class="p">],</span><span class="w">
+            </span><span class="p">[</span><span class="s2">"female"</span><span class="p">,</span><span class="w"> </span><span class="s2">"schoolgirl uniform"</span><span class="p">],</span><span class="w">
+            </span><span class="p">[</span><span class="s2">"female"</span><span class="p">,</span><span class="w"> </span><span class="s2">"sole female"</span><span class="p">],</span><span class="w">
+            </span><span class="p">[</span><span class="s2">"female"</span><span class="p">,</span><span class="w"> </span><span class="s2">"tickling"</span><span class="p">]</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="nl">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-06-23T06:07:00.000Z"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-06-23T06:07:00.000Z"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1918527</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Maji Seiyoku 1000% |  정말 성욕 1000%"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"kind"</span><span class="p">:</span><span class="w"> </span><span class="s2">"manga"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"language"</span><span class="p">:</span><span class="w"> </span><span class="s2">"korean"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"page"</span><span class="p">:</span><span class="w"> </span><span class="mi">24</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"tags"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">[</span><span class="s2">"artist"</span><span class="p">,</span><span class="w"> </span><span class="s2">"nunnu"</span><span class="p">],</span><span class="w">
+            </span><span class="p">[</span><span class="s2">"female"</span><span class="p">,</span><span class="w"> </span><span class="s2">"schoolgirl uniform"</span><span class="p">],</span><span class="w">
+            </span><span class="p">[</span><span class="s2">"female"</span><span class="p">,</span><span class="w"> </span><span class="s2">"sole female"</span><span class="p">],</span><span class="w">
+            </span><span class="p">[</span><span class="s2">"male"</span><span class="p">,</span><span class="w"> </span><span class="s2">"teacher"</span><span class="p">]</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="nl">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2021-05-26T07:43:00.000Z"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2021-05-26T07:43:00.000Z"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre></div>
+<p>주어진 작품 번호 중에 없는 작품은 제외하고, 주어진 순서대로 작품 정보를 드려요.</p>
+<h3 id='http-request-4'>HTTP Request</h3>
+<p><code>GET /books</code></p>
+<h3 id='query-parameters-2'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th>Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>ids</td>
+<td>작품 번호들</td>
+<td><code>List&lt;1 ~&gt;</code></td>
+</tr>
+</tbody></table>
+<h3 id='http-response-4'>HTTP Response</h3>
+<table><thead>
+<tr>
+<th>Code</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>200</td>
+<td>성공함</td>
+</tr>
+</tbody></table>
+<h2 id='get-books-by-tags'>Get Books By Tags</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="se">\</span>
+    <span class="nt">-X</span> GET <span class="se">\</span>
+    <span class="c"># /books?tags[]=artist-nunnu&amp;per-page=2</span>
+    <span class="c"># 또는</span>
+    /books?tags[0][0]<span class="o">=</span>artist&amp;tags[0][1]<span class="o">=</span>nunnu&amp;per-page<span class="o">=</span>2
+</code></pre></div>
+<blockquote>
+<p>Returns JSON</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json-doc"><code><span class="p">[</span><span class="w">
+    </span><span class="p">[</span><span class="w">
+        </span><span class="p">[</span><span class="s2">"artist"</span><span class="p">,</span><span class="w"> </span><span class="s2">"nunnu"</span><span class="p">],</span><span class="w">
+        </span><span class="p">[</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2070089</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Jikken Shimasho!? | 실험합시다!?"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"kind"</span><span class="p">:</span><span class="w"> </span><span class="s2">"manga"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"language"</span><span class="p">:</span><span class="w"> </span><span class="s2">"korean"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"page"</span><span class="p">:</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"tags"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                    </span><span class="p">[</span><span class="s2">"artist"</span><span class="p">,</span><span class="w"> </span><span class="s2">"nunnu"</span><span class="p">],</span><span class="w">
+                    </span><span class="p">[</span><span class="s2">"female"</span><span class="p">,</span><span class="w"> </span><span class="s2">"lab coat"</span><span class="p">],</span><span class="w">
+                    </span><span class="p">[</span><span class="s2">"female"</span><span class="p">,</span><span class="w"> </span><span class="s2">"schoolgirl uniform"</span><span class="p">],</span><span class="w">
+                    </span><span class="p">[</span><span class="s2">"female"</span><span class="p">,</span><span class="w"> </span><span class="s2">"sole female"</span><span class="p">],</span><span class="w">
+                    </span><span class="p">[</span><span class="s2">"male"</span><span class="p">,</span><span class="w"> </span><span class="s2">"collar"</span><span class="p">],</span><span class="w">
+                    </span><span class="p">[</span><span class="s2">"male"</span><span class="p">,</span><span class="w"> </span><span class="s2">"schoolboy uniform"</span><span class="p">],</span><span class="w">
+                    </span><span class="p">[</span><span class="s2">"male"</span><span class="p">,</span><span class="w"> </span><span class="s2">"sole male"</span><span class="p">]</span><span class="w">
+                </span><span class="p">],</span><span class="w">
+                </span><span class="nl">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2021-11-26T03:12:00.000Z"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2021-11-26T03:12:00.000Z"</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1995673</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hikkoshi zamen ikagadesuka? | 이사 정액은 어떠신가요?"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"kind"</span><span class="p">:</span><span class="w"> </span><span class="s2">"manga"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"language"</span><span class="p">:</span><span class="w"> </span><span class="s2">"korean"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"page"</span><span class="p">:</span><span class="w"> </span><span class="mi">22</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"tags"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                    </span><span class="p">[</span><span class="s2">"artist"</span><span class="p">,</span><span class="w"> </span><span class="s2">"nunnu"</span><span class="p">],</span><span class="w">
+                    </span><span class="p">[</span><span class="s2">"female"</span><span class="p">,</span><span class="w"> </span><span class="s2">"big breasts"</span><span class="p">],</span><span class="w">
+                    </span><span class="p">[</span><span class="s2">"female"</span><span class="p">,</span><span class="w"> </span><span class="s2">"blowjob"</span><span class="p">],</span><span class="w">
+                    </span><span class="p">[</span><span class="s2">"female"</span><span class="p">,</span><span class="w"> </span><span class="s2">"nakadashi"</span><span class="p">],</span><span class="w">
+                    </span><span class="p">[</span><span class="s2">"female"</span><span class="p">,</span><span class="w"> </span><span class="s2">"sole female"</span><span class="p">],</span><span class="w">
+                    </span><span class="p">[</span><span class="s2">"male"</span><span class="p">,</span><span class="w"> </span><span class="s2">"glasses"</span><span class="p">],</span><span class="w">
+                    </span><span class="p">[</span><span class="s2">"male"</span><span class="p">,</span><span class="w"> </span><span class="s2">"sole male"</span><span class="p">],</span><span class="w">
+                    </span><span class="p">[</span><span class="s2">"male"</span><span class="p">,</span><span class="w"> </span><span class="s2">"virginity"</span><span class="p">]</span><span class="w">
+                </span><span class="p">],</span><span class="w">
+                </span><span class="nl">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2021-08-28T08:34:00.000Z"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2021-08-28T08:34:00.000Z"</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">]</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre></div>
+<p><code>List&lt;((Kind, Name), List&lt;Book&gt;)&gt;</code></p>
+<h3 id='http-request-5'>HTTP Request</h3>
+<p><code>GET /books</code></p>
+<h3 id='query-parameters-3'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th>Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>tags</td>
+<td>작품 태그들</td>
+<td><code>List&lt;Tag&gt;</code></td>
+</tr>
+</tbody></table>
+<h3 id='http-response-5'>HTTP Response</h3>
+<table><thead>
+<tr>
+<th>Code</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>200</td>
+<td>성공함</td>
+</tr>
+</tbody></table>
+<h2 id='get-book-image-list'>Get Book Image List</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="se">\</span>
+    <span class="nt">-X</span> GET <span class="se">\</span>
+    /books/:book_id/images
+</code></pre></div>
+<blockquote>
+<p>Returns JSON</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json-doc"><code><span class="p">[</span><span class="w">
+    </span><span class="s2">"1.jpg"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"2.jpg"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"3.jpg"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"4.jpg"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"5.jpg"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"6.jpg"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"7.jpg"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"8.jpg"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"9.jpg"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"10.jpg"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"11.jpg"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"12.jpg"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"13.jpg"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"14.jpg"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"15.jpg"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"16.jpg"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"17.jpg"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"18.jpg"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"19.jpg"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"20.jpg"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"21.jpg"</span><span class="p">,</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre></div><h3 id='http-request-6'>HTTP Request</h3>
+<p><code>GET /books/:book_id/images</code></p>
+<h3 id='url-parameters-2'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th>Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>book_id</td>
+<td>작품 번호</td>
+<td><code>1 ~</code></td>
+</tr>
+</tbody></table>
+<h3 id='http-response-6'>HTTP Response</h3>
+<table><thead>
+<tr>
+<th>Code</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>200</td>
+<td>성공함</td>
+</tr>
+<tr>
+<td>404</td>
+<td>작품이 없음 &lt;!-- 작품이 없거나 이미지 업로드가 아직 안 됨 - 사실 여부를 확인해야함 - --&gt;</td>
+</tr>
+</tbody></table>
+<h2 id='get-book-image'>Get Book Image</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="se">\</span>
+    <span class="nt">-X</span> GET <span class="se">\</span>
+    /books/:book_id/images/:file_name
+</code></pre></div>
+<blockquote>
+<p>Returns Image</p>
+</blockquote>
+
+<p>jpg, png, gif, webp, avif</p>
+<h3 id='http-request-7'>HTTP Request</h3>
+<p><code>GET /books/:book_id/images/:file_name</code></p>
+<h3 id='url-parameters-3'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th>Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>book_id</td>
+<td>작품 번호</td>
+<td><code>1 ~</code></td>
+</tr>
+<tr>
+<td>file_name</td>
+<td>확장자를 포함한 이미지 파일 이름</td>
+<td><code>string</code></td>
+</tr>
+</tbody></table>
+<h2 id='search-books'>Search Books</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="se">\</span>
+    <span class="nt">-X</span> GET <span class="se">\</span>
+    /books/search?q<span class="o">=</span>female%20loli%20AND%20female%20anal&amp;per-page<span class="o">=</span>2
+</code></pre></div>
+<blockquote>
+<p>Returns JSON, Get Books와 같음</p>
+</blockquote>
+
+<p>현재는 영어만 지원하는데, 한글도 지원할 예정</p>
+<h3 id='about-search-query'>About Search Query</h3>
+<p>지원하는 연산자는 <code>AND</code>, <code>OR</code>, <code>NOT</code> 이며, <code>female loli AND (NOT female anal)</code>과 같은 형식으로 사용하면 돼요</p>
+<h3 id='http-request-8'>HTTP Request</h3>
+<p><code>GET /books/search</code></p>
+<h3 id='query-parameters-4'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th>Value</th>
+<th>Default</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>q</td>
+<td>search query</td>
+<td><code>string</code></td>
+<td><code>null</code></td>
+</tr>
+<tr>
+<td>search-kind</td>
+<td>검색 종류</td>
+<td><code>title</code>, <code>tag</code></td>
+<td><code>null</code></td>
+</tr>
+<tr>
+<td>book-kind</td>
+<td>작품 종류</td>
+<td><code>doujinshi</code>, <code>manga</code>, <code>artist-cg</code>, <code>game-cg</code></td>
+<td><code>null</code></td>
+</tr>
+<tr>
+<td>per-page</td>
+<td>per page</td>
+<td><code>1 ~ 100</code></td>
+<td><code>25</code></td>
+</tr>
+<tr>
+<td>page</td>
+<td>page</td>
+<td><code>1 ~</code></td>
+<td><code>1</code></td>
+</tr>
+<tr>
+<td>sort-by</td>
+<td>정렬 방법</td>
+<td><code>id-asc</code>, <code>id-desc</code>, <code>rank-asc</code>, <code>rank-desc</code>, <code>random</code></td>
+<td><code>rank-desc</code></td>
+</tr>
+</tbody></table>
+<h3 id='http-response-7'>HTTP Response</h3>
+<table><thead>
+<tr>
+<th>Code</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>200</td>
+<td>성공함</td>
+</tr>
+</tbody></table>
+<h2 id='search-books-query-completion'>Search Books Query Completion</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="se">\</span>
+    <span class="nt">-X</span> GET <span class="se">\</span>
+    /books/search/completion?q<span class="o">=</span>female%20l&amp;search-kind<span class="o">=</span>tag&amp;per-page<span class="o">=</span>5
+</code></pre></div>
+<blockquote>
+<p>Returns JSON</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json-doc"><code><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"keyword"</span><span class="p">:</span><span class="w"> </span><span class="s2">"female lab coat"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"completion"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ab coat"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"keyword"</span><span class="p">:</span><span class="w"> </span><span class="s2">"female lactation"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"completion"</span><span class="p">:</span><span class="w"> </span><span class="s2">"actation"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"keyword"</span><span class="p">:</span><span class="w"> </span><span class="s2">"female large insertions"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"completion"</span><span class="p">:</span><span class="w"> </span><span class="s2">"arge insertions"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"keyword"</span><span class="p">:</span><span class="w"> </span><span class="s2">"female large tattoo"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"completion"</span><span class="p">:</span><span class="w"> </span><span class="s2">"arge tattoo"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"keyword"</span><span class="p">:</span><span class="w"> </span><span class="s2">"female latex"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"completion"</span><span class="p">:</span><span class="w"> </span><span class="s2">"atex"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre></div>
+<p>검색 쿼리 자동완성</p>
+
+<p>검색 결과랑은 다를 수 있어요</p>
+
+<p><code>completion</code>은 <code>search-kind</code>가 <code>tag</code>인 경우에만 제공돼요</p>
+<h3 id='http-request-9'>HTTP Request</h3>
+<p><code>GET /books/search/completion</code></p>
+<h3 id='query-parameters-5'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th>Value</th>
+<th>Default</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>q</td>
+<td>search query</td>
+<td><code>string</code></td>
+<td><code>null</code></td>
+</tr>
+<tr>
+<td>search-kind</td>
+<td>검색 종류</td>
+<td><code>title</code>, <code>tag</code></td>
+<td><code>null</code></td>
+</tr>
+<tr>
+<td>per-page</td>
+<td>per page</td>
+<td><code>1 ~ 100</code></td>
+<td><code>25</code></td>
+</tr>
+<tr>
+<td>page</td>
+<td>page</td>
+<td><code>1 ~</code></td>
+<td><code>1</code></td>
+</tr>
+</tbody></table>
+<h3 id='http-response-8'>HTTP Response</h3>
+<table><thead>
+<tr>
+<th>Code</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>200</td>
+<td>성공함</td>
 </tr>
 </tbody></table>
 
