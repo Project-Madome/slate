@@ -59,22 +59,21 @@ curl \
 
 ### HTTP Request
 
-`GET http://example.com/kittens/<ID>`
+`POST /users`
 
 ### Body Parameters
 
-Parameter | Description                         | Required |
---------- | ----------------------------------- | -------- |
-name      | 사용자의 이름. 서버에서 유일해야해요. 이름의 길이는 `1 ~ 20` 이에요 | O
-email     | 사용자의 메일주소. 서버에서 유일해야해요. 이메일이어야 해요| O
-role      | 사용자의 권한. 현재는 `0 ~ 1` 까지만 존재해요. | X
+Parameter | Description  | Value| Required |
+--------- | ------------ | ---- | -------- |
+name      | 사용자의 이름 | 길이 `1 ~ 20` | O
+email     | 사용자의 메일주소 | 이메일 | O
+role      | 사용자의 권한 | `0 ~ 1` | X
 
 ### HTTP Response
 
 Code | Description |
 ---- | ----------- |
 201  | 사용자를 생성했어요. |
-400  | 잘못된 요청이에요. 다시 한번 확인해줄래요? |
 409  | 이미 존재하는 사용자예요. |
 
 ## Create or Update Fcm Token

@@ -13,6 +13,8 @@ includes:
   - user
   - like
   - notification
+  - history
+  - library
 
 search: false
 
@@ -48,3 +50,7 @@ curl \
 `Url`에 포함된 데이터들(e.g. querystring)는 `kebab-case`를 사용해요.
 
 `Body`를 통해 오고 가는 데이터들은 `snake_case`를 사용해요.
+
+# Querystring parser
+
+[qs](https://www.npmjs.com/package/qs)를 사용하고 있어요.

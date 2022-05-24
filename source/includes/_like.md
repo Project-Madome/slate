@@ -15,45 +15,22 @@ curl \
     {
         "kind": "book",
         "book_id": 423144,
-        "created_at": "2022-02-11T11:53:57.496082Z"
-    },
-    {
-        "kind": "book",
-        "book_id": 42314,
-        "created_at": "2022-02-11T11:53:55.453460Z"
+        "created_at": "2022-02-11T11:53:57.496082Z",
+        "book": Book // 내부 서버에게는 book은 주지 않음
     },
     {
         "kind": "book_tag",
         "tag_kind": "female",
         "tag_name": "loli",
-        "created_at": "2022-02-11T11:53:50.429997Z"
-    },
-    {
-        "kind": "book_tag",
-        "tag_kind": "female",
-        "tag_name": "rape",
-        "created_at": "2022-02-11T11:53:43.908101Z"
-    },
-    {
-        "kind": "book_tag",
-        "tag_kind": "female",
-        "tag_name": "netorare",
-        "created_at": "2022-02-10T16:20:20.060132Z"
-    },
-    {
-        "kind": "book",
-        "book_id": 123452,
-        "created_at": "2022-02-10T14:59:16.698506Z"
-    },
-    {
-        "kind": "book",
-        "book_id": 123451,
-        "created_at": "2022-02-10T14:59:06.656643Z"
+        "created_at": "2022-02-11T11:53:50.429997Z",
+        "books": [Book, Book, Book] // 내부 서버에게는 books는 주지 않음
     }
 ]
 ```
 
 사용자가 좋아요한 것들을 가져와요.
+
+books의 per-page는 3, page는 1이에요
 
 ### HTTP Request
 
@@ -91,7 +68,7 @@ curl \
 ```shell
 curl \
     -X POST \
-    -d '{ "kind": "book", "tag_kind": "female", "tag_name": "loli" }' \
+    -d '{ "kind": "book_tag", "tag_kind": "female", "tag_name": "loli" }' \
     "/users/@me/likes"
 ```
 
