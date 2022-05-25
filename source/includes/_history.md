@@ -73,6 +73,7 @@ book_id | 작품 번호 | `1 ~`
 Code | Description
 ---- | ----------
 201 | 성공함
+404 | 없는 작품이에요
 
 ## Delete History
 

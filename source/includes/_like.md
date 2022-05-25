@@ -100,6 +100,7 @@ tag_name | 태그의 이름 | `string` |
 Code | Description
 ---- | ----------
 201  | 성공했어요.
+404  | 없는 작품 또는 태그예요.
 409  | 이미 있어요.
 
 ## Delete Like
