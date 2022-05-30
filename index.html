@@ -1220,7 +1220,9 @@ Set-Cookie: madome_refresh_token=REFRESH_TOKEN;
 </span><span class="p">]</span><span class="w">
 </span></code></pre></div>
 <p>유효하지 않는 데이터가 있는 경우(예를 들면, 없는 작품에 대한 History)에는 응답에서 해당 데이터는 제외함</p>
-<h3 id='http-request'>HTTP Request</h3><h3 id='query-parameters'>Query Parameters</h3>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code>GET /users/@me/histories</code></p>
+<h3 id='query-parameters'>Query Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -1268,7 +1270,7 @@ Set-Cookie: madome_refresh_token=REFRESH_TOKEN;
 <p>Returns Nothing</p>
 </blockquote>
 <h3 id='http-request-2'>HTTP Request</h3>
-<p><code>GET /users/@me/histories</code></p>
+<p><code>POST /users/@me/histories</code></p>
 <h3 id='body-parameters'>Body Parameters</h3>
 <table><thead>
 <tr>
