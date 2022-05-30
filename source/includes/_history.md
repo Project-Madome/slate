@@ -33,6 +33,8 @@ curl \
 
 ### HTTP Request
 
+`GET /users/@me/histories`
+
 ### Query Parameters
 
 Parameter | Description | Value | Default
@@ -59,7 +61,7 @@ curl \
 
 ### HTTP Request
 
-`GET /users/@me/histories`
+`POST /users/@me/histories`
 
 ### Body Parameters
 
