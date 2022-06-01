@@ -335,6 +335,9 @@
                   <li>
                     <a href="#check-and-refresh-token-pair" class="toc-h2 toc-link" data-title="Check and Refresh Token Pair">Check and Refresh Token Pair</a>
                   </li>
+                  <li>
+                    <a href="#delete-token-pair" class="toc-h2 toc-link" data-title="Delete Token Pair">Delete Token Pair</a>
+                  </li>
               </ul>
           </li>
           <li>
@@ -712,6 +715,27 @@ Set-Cookie: madome_refresh_token=REFRESH_TOKEN;
 <tr>
 <td>403</td>
 <td>권한이 부족해요.</td>
+</tr>
+</tbody></table>
+<h2 id='delete-token-pair'>Delete Token Pair</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="se">\</span>
+    <span class="nt">-X</span> DELETE <span class="se">\</span>
+    /auth/token
+</code></pre></div>
+<blockquote>
+<p>Returns Nothing</p>
+</blockquote>
+<h3 id='http-request-5'>HTTP Request</h3>
+<p><code>DELETE /auth/token</code></p>
+<h3 id='http-response-5'>HTTP Response</h3>
+<table><thead>
+<tr>
+<th>Code</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>204</td>
+<td>성공함</td>
 </tr>
 </tbody></table>
 <h1 id='user'>User</h1><h2 id='get-me'>Get Me</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">-X</span> GET <span class="se">\</span>
