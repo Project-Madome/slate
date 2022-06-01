@@ -190,3 +190,23 @@ Code | Description |
 200  | 인증 성공했어요. |
 401  | `Access Token`이 유효하지 않아요. |
 403  | 권한이 부족해요. |
+
+## Delete Token Pair
+
+```shell
+curl \
+    -X DELETE \
+    /auth/token
+```
+
+> Returns Nothing
+
+### HTTP Request
+
+`DELETE /auth/token`
+
+### HTTP Response
+
+Code | Description
+---- | ---------
+204 | 성공함
