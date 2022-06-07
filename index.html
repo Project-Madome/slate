@@ -333,7 +333,7 @@
                     <a href="#check-access-token" class="toc-h2 toc-link" data-title="Check Access Token">Check Access Token</a>
                   </li>
                   <li>
-                    <a href="#check-and-refresh-token-pair" class="toc-h2 toc-link" data-title="Check and Refresh Token Pair">Check and Refresh Token Pair</a>
+                    <a href="#refresh-token-pair" class="toc-h2 toc-link" data-title="Refresh Token Pair">Refresh Token Pair</a>
                   </li>
                   <li>
                     <a href="#delete-token-pair" class="toc-h2 toc-link" data-title="Delete Token Pair">Delete Token Pair</a>
@@ -439,15 +439,17 @@
 </code></pre></div>
 <p>마도메 API</p>
 
-<p>요청하려는 API 설명에 토큰 미포함에 대한 설명이 있지 않으면 토큰을 포함해서 요청을 보내면 돼요.</p>
+<p>토큰은 Cookie를 통해 전송돼요</p>
 
-<p>토큰은 <code>HTTP Cookie</code>를 통해 관리되고, 토큰 인증 및 재발급은 인증이 필요한 API 엔드포인트에서 처리해요.</p>
+<!-- 요청하려는 API 설명에 토큰 미포함에 대한 설명이 있지 않으면 토큰을 포함해서 요청을 보내면 돼요.
 
-<p>클라이언트는 요청을 보낼 때마다 <code>HTTP Cookie</code>에 토큰을 포함시키기만 하면 된다는 말이에요.</p>
+토큰은 `HTTP Cookie`를 통해 관리되고, 토큰 인증 및 재발급은 인증이 필요한 API 엔드포인트에서 처리해요.
 
-<p>아래 이미지는 인증 서버에서 실행되는 <code>Check and Refresh Token</code>에 대한 순서도예요.</p>
+클라이언트는 요청을 보낼 때마다 `HTTP Cookie`에 토큰을 포함시키기만 하면 된다는 말이에요.
 
-<p><img src="images/auth-flowchart-6546b9c9.svg" alt="auth-flowchart" /></p>
+아래 이미지는 인증 서버에서 실행되는 `Check and Refresh Token`에 대한 순서도예요.
+
+![auth-flowchart](auth-flowchart.svg) -->
 <h1 id='naming-rules'>Naming rules</h1>
 <p><code>Url</code>에 포함된 데이터들(e.g. querystring)는 <code>kebab-case</code>를 사용해요.</p>
 
@@ -653,12 +655,12 @@ Set-Cookie: madome_refresh_token=REFRESH_TOKEN;
 <td>권한이 부족해요.</td>
 </tr>
 </tbody></table>
-<h2 id='check-and-refresh-token-pair'>Check and Refresh Token Pair</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="se">\</span>
-    <span class="nt">-X</span> GET <span class="se">\</span>
+<h2 id='refresh-token-pair'>Refresh Token Pair</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="se">\</span>
+    <span class="nt">-X</span> PATCH <span class="se">\</span>
     <span class="s2">"/auth/token
 </span></code></pre></div>
 <blockquote>
-<p>If refreshed, Returns Set-Cookie to HTTP Headers</p>
+<p>Returns Set-Cookie to HTTP Headers</p>
 </blockquote>
 <div class="highlight"><pre class="highlight plaintext"><code>Set-Cookie: madome_access_token=ACCESS_TOKEN;
             Domain=madome.app;
@@ -681,22 +683,6 @@ Set-Cookie: madome_refresh_token=REFRESH_TOKEN;
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div><h3 id='http-request-4'>HTTP Request</h3>
 <p><code>PATCH /auth/token</code></p>
-<h3 id='query-parameters-2'>Query Parameters</h3>
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Description</th>
-<th>Value</th>
-<th>Default</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>role</td>
-<td>인증에 필요한 최소 권한</td>
-<td><code>0 ~ 1</code></td>
-<td><code>0</code></td>
-</tr>
-</tbody></table>
 <h3 id='http-response-4'>HTTP Response</h3>
 <table><thead>
 <tr>
@@ -710,7 +696,7 @@ Set-Cookie: madome_refresh_token=REFRESH_TOKEN;
 </tr>
 <tr>
 <td>401</td>
-<td><code>Access Token</code>이 유효하지 않아요.</td>
+<td>토큰이 유효하지 않아요.</td>
 </tr>
 <tr>
 <td>403</td>
