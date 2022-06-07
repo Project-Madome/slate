@@ -35,7 +35,9 @@ curl \
 
 마도메 API
 
-요청하려는 API 설명에 토큰 미포함에 대한 설명이 있지 않으면 토큰을 포함해서 요청을 보내면 돼요.
+토큰은 Cookie를 통해 전송돼요
+
+<!-- 요청하려는 API 설명에 토큰 미포함에 대한 설명이 있지 않으면 토큰을 포함해서 요청을 보내면 돼요.
 
 토큰은 `HTTP Cookie`를 통해 관리되고, 토큰 인증 및 재발급은 인증이 필요한 API 엔드포인트에서 처리해요.
 
@@ -43,7 +45,7 @@ curl \
 
 아래 이미지는 인증 서버에서 실행되는 `Check and Refresh Token`에 대한 순서도예요.
 
-![auth-flowchart](auth-flowchart.svg)
+![auth-flowchart](auth-flowchart.svg) -->
 
 # Naming rules
 
