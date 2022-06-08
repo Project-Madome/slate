@@ -178,8 +178,10 @@ Parameter | Description | Value | Default
 --------- | ----------- | ----- | ------
 per-page | per page | `1 ~ 100` | `25`
 page | page | `1 ~` | `1`
-kind | 작품 종류 | `doujinshi`, `manga`, `artist-cg`, `game-cg` | null
+kind | 작품 종류 | `doujinshi`, `manga`, `artist-cg`, `game-cg` | `null`
 sort-by | 정렬 방법 | `id-desc`, `id-asc`, `random` | `id-desc`
+less-than | 주어진 id 보다 작은 작품들만 | `1 ~` | `null`
+more-than | 주어진 id 보다 큰 작품들만 | `1 ~` | `null`
 
 ### HTTP Response
 
