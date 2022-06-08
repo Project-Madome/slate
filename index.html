@@ -456,6 +456,21 @@
 <p><code>Body</code>를 통해 오고 가는 데이터들은 <code>snake_case</code>를 사용해요.</p>
 <h1 id='querystring-parser'>Querystring parser</h1>
 <p><a href="https://www.npmjs.com/package/qs">qs</a>를 사용하고 있어요.</p>
+
+<!-- # Error Code
+
+## Auth
+10001 ~ 19999
+
+## User
+20001 ~ 29999
+
+## Library
+30001 ~ 39999
+
+Code  | Description
+----  | ----------
+10001 |  -->
 <h1 id='errors'>Errors</h1>
 <table><thead>
 <tr>
@@ -1585,13 +1600,25 @@ Set-Cookie: madome_refresh_token=REFRESH_TOKEN;
 <td>kind</td>
 <td>작품 종류</td>
 <td><code>doujinshi</code>, <code>manga</code>, <code>artist-cg</code>, <code>game-cg</code></td>
-<td>null</td>
+<td><code>null</code></td>
 </tr>
 <tr>
 <td>sort-by</td>
 <td>정렬 방법</td>
 <td><code>id-desc</code>, <code>id-asc</code>, <code>random</code></td>
 <td><code>id-desc</code></td>
+</tr>
+<tr>
+<td>less-than</td>
+<td>주어진 id 보다 작은 작품들만</td>
+<td><code>1 ~</code></td>
+<td><code>null</code></td>
+</tr>
+<tr>
+<td>more-than</td>
+<td>주어진 id 보다 큰 작품들만</td>
+<td><code>1 ~</code></td>
+<td><code>null</code></td>
 </tr>
 </tbody></table>
 <h3 id='http-response-3'>HTTP Response</h3>
