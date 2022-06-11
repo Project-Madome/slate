@@ -15,6 +15,7 @@ curl \
     {
         "kind": "book",
         "book_id": 2217180,
+        "page": 3,
         "created_at": "2022-05-19T04:02:50.691Z",
         "updated_at": "2022-05-20T05:21:44.866Z",
         "book": Book
@@ -22,6 +23,7 @@ curl \
     {
         "kind": "book",
         "book_id": 1394806,
+        "page": 1,
         "created_at": "2022-03-09T13:43:48.727Z",
         "updated_at": "2022-05-20T05:11:13.011Z",
         "book": Book
@@ -69,6 +71,7 @@ Parameter | Description | Value
 --------- | ----------- | -----
 kind | 히스토리의 종류 | `book`
 book_id | 작품 번호 | `1 ~`
+page | 마지막으로 본 페이지 | `1 ~`
 
 ### HTTP Response
 

@@ -4,7 +4,7 @@
 
 태그는 `[kind, name]`와 같이 tuple로 이루어져 있으며,`[female, double penetration]` 또는 `[artist, nunnu]` 와 같이 사용합니다.
 
-URL에 사용해야 하는 경우에는 `kind-name`와 같이 사용하면 되며, `female-double-penetration` 또는 `artist-nunnu` 와 같이 사용합니다.
+<!-- URL에 사용해야 하는 경우에는 `kind-name`와 같이 사용하면 되며, `female-double-penetration` 또는 `artist-nunnu` 와 같이 사용합니다. -->
 
 ### Tag Kind
 

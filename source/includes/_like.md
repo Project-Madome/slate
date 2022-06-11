@@ -44,6 +44,9 @@ per-page | 가져올 개수 | `1 ~ 100` | `25` |
 page | 페이지 | `1 ~` | `1` |
 sort-by | 정렬 방법 | `created-at-desc`, `created-at-asc`, `random` | `created-at-desc` |
 kind | `Like`의 종류 | `book`, `book_tag` | `null` |
+books-per-page | `kind`가 `book_tag`인 경우에 포함되는 `books`의 `per-page` | `1 ~ 100` | `3`
+books-page | `kind`가 `book_tag`인 경우에 포함되는 `books`의 `page` | `1 ~` | `1`
+books-sort-by | `kind`가 `book_tag`인 경우에 포함되는 `books`의 `sort-by` | `id-desc`, `id-asc`, `random` | `id-desc`
 
 
 ### HTTP Response
