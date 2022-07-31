@@ -37,6 +37,9 @@ curl \
 
 토큰은 Cookie를 통해 전송돼요
 
+`Access Token`의 만료 기간은 발급 시점으로부터 4시간,
+`Refresh Token`의 만료 기간은 발급 시점으로 부터 7일이에요
+
 <!-- 요청하려는 API 설명에 토큰 미포함에 대한 설명이 있지 않으면 토큰을 포함해서 요청을 보내면 돼요.
 
 토큰은 `HTTP Cookie`를 통해 관리되고, 토큰 인증 및 재발급은 인증이 필요한 API 엔드포인트에서 처리해요.
@@ -49,10 +52,25 @@ curl \
 
 # Naming rules
 
-`Url`에 포함된 데이터들(e.g. querystring)는 `kebab-case`를 사용해요.
+`querystring`은 `kebab-case`를 사용해요.
 
 `Body`를 통해 오고 가는 데이터들은 `snake_case`를 사용해요.
 
 # Querystring parser
 
 [qs](https://www.npmjs.com/package/qs)를 사용하고 있어요.
+
+<!-- # Error Code
+
+## Auth
+10001 ~ 19999
+
+## User
+20001 ~ 29999
+
+## Library
+30001 ~ 39999
+
+Code  | Description
+----  | ----------
+10001 |  -->

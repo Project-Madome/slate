@@ -5,7 +5,7 @@
 ```shell
 curl \
     -X GET \
-    "/users/@me/likes"
+    "/users/@me/likes?is-dislike=false&per-page=2"
 ```
 
 > Returns JSON
@@ -15,22 +15,22 @@ curl \
     {
         "kind": "book",
         "book_id": 423144,
+        "is_dislike": false,
         "created_at": "2022-02-11T11:53:57.496082Z",
-        "book": Book // 내부 서버에게는 book은 주지 않음
+        "book": Book
     },
     {
         "kind": "book_tag",
         "tag_kind": "female",
         "tag_name": "loli",
+        "is_dislike": false,
         "created_at": "2022-02-11T11:53:50.429997Z",
-        "books": [Book, Book, Book] // 내부 서버에게는 books는 주지 않음
+        "books": [Book, Book, Book]
     }
 ]
 ```
 
 사용자가 좋아요한 것들을 가져와요.
-
-books의 per-page는 3, page는 1이에요
 
 ### HTTP Request
 
@@ -47,6 +47,7 @@ kind | `Like`의 종류 | `book`, `book_tag` | `null` |
 books-per-page | `kind`가 `book_tag`인 경우에 포함되는 `books`의 `per-page` | `1 ~ 100` | `3`
 books-page | `kind`가 `book_tag`인 경우에 포함되는 `books`의 `page` | `1 ~` | `1`
 books-sort-by | `kind`가 `book_tag`인 경우에 포함되는 `books`의 `sort-by` | `id-desc`, `id-asc`, `random` | `id-desc`
+is-dislike | 싫어요? | `boolean` | 없으면 안 돼요
 
 
 ### HTTP Response
@@ -55,14 +56,14 @@ Code | Description |
 ---- | ----------- |
 200  | 성공했어요. |
 
-## Create Like
+## Create or Update Like
 
 > If book
 
 ```shell
 curl \
     -X POST \
-    -d '{ "kind": "book", "book_id": 123456 }' \
+    -d '{ "kind": "book", "book_id": 123456, "is_dislike": false }' \
     "/users/@me/likes"
 ```
 
@@ -71,7 +72,7 @@ curl \
 ```shell
 curl \
     -X POST \
-    -d '{ "kind": "book_tag", "tag_kind": "female", "tag_name": "loli" }' \
+    -d '{ "kind": "book_tag", "tag_kind": "female", "tag_name": "loli", "is_dislike": false }' \
     "/users/@me/likes"
 ```
 
@@ -89,6 +90,7 @@ Parameter | Description | Value |
 --------- | ----------- | ----- |
 kind | `Like`의 종류 | `book` |
 book_id | 책 ID | `0 ~` |
+is_dislike | 싫어요? | `boolean`
 
 #### Book Tag
 
@@ -97,6 +99,7 @@ Parameter | Description | Value |
 kind | `Like`의 종류 | `book_tag` |
 tag_kind | 태그의 종류 | `string` |
 tag_name | 태그의 이름 | `string` |
+is_dislike | 싫어요? | `boolean`
 
 ### HTTP Response
 
