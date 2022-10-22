@@ -1,11 +1,11 @@
 # Like
 
-## Get Likes
+## Get Likes | Dislikes
 
 ```shell
 curl \
     -X GET \
-    "/users/@me/likes?is-dislike=false&per-page=2"
+    "/users/@me/likes?per-page=2" # "/users/@me/dislikes?per-page=2"
 ```
 
 > Returns JSON
@@ -36,6 +36,8 @@ curl \
 
 `GET /users/@me/likes`
 
+`GET /users/@me/dislikes`
+
 ### Query Parameters
 
 Parameter | Description | Value | Default |
@@ -47,7 +49,6 @@ kind | `Like`의 종류 | `book`, `book_tag` | `null` |
 books-per-page | `kind`가 `book_tag`인 경우에 포함되는 `books`의 `per-page` | `1 ~ 100` | `3`
 books-page | `kind`가 `book_tag`인 경우에 포함되는 `books`의 `page` | `1 ~` | `1`
 books-sort-by | `kind`가 `book_tag`인 경우에 포함되는 `books`의 `sort-by` | `id-desc`, `id-asc`, `random` | `id-desc`
-is-dislike | 싫어요? | `boolean` | 없으면 안 돼요
 
 
 ### HTTP Response
@@ -56,7 +57,7 @@ Code | Description |
 ---- | ----------- |
 200  | 성공했어요. |
 
-## Create or Update Like
+## Create or Update Like | Dislike
 
 > If book
 
@@ -64,7 +65,7 @@ Code | Description |
 curl \
     -X POST \
     -d '{ "kind": "book", "book_id": 123456, "is_dislike": false }' \
-    "/users/@me/likes"
+    "/users/@me/likes" # "/users/@me/dislikes"
 ```
 
 > If book_tag
@@ -73,7 +74,7 @@ curl \
 curl \
     -X POST \
     -d '{ "kind": "book_tag", "tag_kind": "female", "tag_name": "loli", "is_dislike": false }' \
-    "/users/@me/likes"
+    "/users/@me/likes" # "/users/@me/dislikes"
 ```
 
 > Returns Nothing
@@ -81,6 +82,8 @@ curl \
 ### HTTP Request
 
 `POST /users/@me/likes`
+
+`POST /users/@me/dislikes`
 
 ### Body Parameters
 
@@ -90,7 +93,6 @@ Parameter | Description | Value |
 --------- | ----------- | ----- |
 kind | `Like`의 종류 | `book` |
 book_id | 책 ID | `0 ~` |
-is_dislike | 싫어요? | `boolean`
 
 #### Book Tag
 
@@ -99,7 +101,6 @@ Parameter | Description | Value |
 kind | `Like`의 종류 | `book_tag` |
 tag_kind | 태그의 종류 | `string` |
 tag_name | 태그의 이름 | `string` |
-is_dislike | 싫어요? | `boolean`
 
 ### HTTP Response
 
@@ -108,7 +109,7 @@ Code | Description
 201  | 성공했어요.
 404  | 없는 작품 또는 태그예요.
 
-## Delete Like
+## Delete Like | Dislike
 
 > If book
 
@@ -116,7 +117,7 @@ Code | Description
 curl \
     -X DELETE \
     -d '{ "kind": "book", "book_id": 123456 }' \
-    "/users/@me/likes"
+    "/users/@me/likes" # "/users/@me/dislikes"
 ```
 
 > If book_tag
@@ -125,7 +126,7 @@ curl \
 curl \
     -X DELETE \
     -d '{ "kind": "book", "tag_kind": "female", "tag_name": "loli" }' \
-    "/users/@me/likes"
+    "/users/@me/likes" # "/users/@me/dislikes"
 ```
 
 > Returns Nothing
@@ -133,6 +134,8 @@ curl \
 ### HTTP Request
 
 `DELETE /users/@me/likes`
+
+`DELETE /users/@me/dislikes`
 
 ### Body Parameters
 
