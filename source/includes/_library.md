@@ -96,7 +96,8 @@ curl \
         ["female", "tickling"]
     ],
     "created_at": "2018-06-23T06:07:00.000Z",
-    "updated_at": "2018-06-23T06:07:00.000Z"
+    "updated_at": "2018-06-23T06:07:00.000Z",
+    "released": true
 }
 ```
 
@@ -146,7 +147,8 @@ curl \
             ["male", "sole male"]
         ],
         "created_at": "2022-01-31T17:12:00.000Z",
-        "updated_at": "2022-01-31T17:12:00.000Z"
+        "updated_at": "2022-01-31T17:12:00.000Z",
+        "released": true
     },
     {
         "id": 2128532,
@@ -163,7 +165,8 @@ curl \
             ["misc", "mosaic censorship"]
         ],
         "created_at": "2022-01-31T15:59:00.000Z",
-        "updated_at": "2022-01-31T15:59:00.000Z"
+        "updated_at": "2022-01-31T15:59:00.000Z",
+        "released": true
     }
 ]
 ```
@@ -218,7 +221,8 @@ curl \
             ["female", "tickling"]
         ],
         "created_at": "2018-06-23T06:07:00.000Z",
-        "updated_at": "2018-06-23T06:07:00.000Z"
+        "updated_at": "2018-06-23T06:07:00.000Z",
+        "released": true
     },
     {
         "id": 1918527,
@@ -233,7 +237,8 @@ curl \
             ["male", "teacher"]
         ],
         "created_at": "2021-05-26T07:43:00.000Z",
-        "updated_at": "2021-05-26T07:43:00.000Z"
+        "updated_at": "2021-05-26T07:43:00.000Z",
+        "released": true
     }
 ]
 ```
@@ -290,7 +295,8 @@ curl \
                     ["male", "sole male"]
                 ],
                 "created_at": "2021-11-26T03:12:00.000Z",
-                "updated_at": "2021-11-26T03:12:00.000Z"
+                "updated_at": "2021-11-26T03:12:00.000Z",
+                "released": true
             },
             {
                 "id": 1995673,
@@ -309,7 +315,8 @@ curl \
                     ["male", "virginity"]
                 ],
                 "created_at": "2021-08-28T08:34:00.000Z",
-                "updated_at": "2021-08-28T08:34:00.000Z"
+                "updated_at": "2021-08-28T08:34:00.000Z",
+                "released": true
             }
         ]
     ]
@@ -385,7 +392,7 @@ book_id | 작품 번호 | `1 ~`
 Code | Description
 ---- | ----------
 200  | 성공함
-404  | 작품이 없음 <!-- 작품이 없거나 이미지 업로드가 아직 안 됨 - 사실 여부를 확인해야함 - -->
+404  | 작품이 없음
 
 ## Get Book Image
 
@@ -411,6 +418,36 @@ Parameter | Description | Value
 --------- | ----------- | -----
 book_id | 작품 번호 | `1 ~`
 file_name | 확장자를 포함한 이미지 파일 이름 | `string`
+
+## Release Book
+
+```shell
+curl \
+    -X PATCH \
+    /books/1242676/release
+```
+
+> Returns Nothing
+
+작품 릴리즈
+
+### HTTP Request
+
+`PATCH /books/:book_id/release`
+
+### URL Parameters
+
+Parameter | Description | Value
+----------|-------------|------
+book_id | 작품 번호 | `1 ~`
+
+### HTTP Response
+
+Code | Description
+---- | ----------
+204  | 성공함
+404  | 작품이 없음
+
 
 ## Search Books
 
