@@ -181,7 +181,7 @@ Set-Cookie: madome_refresh_token=REFRESH_TOKEN;
 
 Code | Description |
 ---- | ----------- |
-200  | 인증 성공했어요. |
+201  | 성공했어요. |
 401  | 토큰이 유효하지 않아요. |
 403  | 권한이 부족해요. |
 
