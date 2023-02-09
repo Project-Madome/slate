@@ -165,13 +165,13 @@ Set-Cookie: madome_refresh_token=REFRESH_TOKEN;
             HttpOnly;
 ```
 
-> Returns JSON
+<!-- > Returns Nothing
 
 ```jsonc
 {
     "user_id": "1e441e4d-f065-4f30-8c59-7e725f18ecf0"
 }
-```
+``` -->
 
 ### HTTP Request
 
