@@ -355,16 +355,16 @@
               </ul>
           </li>
           <li>
-            <a href="#like" class="toc-h1 toc-link" data-title="Like">Like</a>
+            <a href="#taste" class="toc-h1 toc-link" data-title="Taste">Taste</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#get-likes-dislikes" class="toc-h2 toc-link" data-title="Get Likes | Dislikes">Get Likes | Dislikes</a>
+                    <a href="#get-tastes" class="toc-h2 toc-link" data-title="Get Tastes">Get Tastes</a>
                   </li>
                   <li>
-                    <a href="#create-or-update-like-dislike" class="toc-h2 toc-link" data-title="Create or Update Like | Dislike">Create or Update Like | Dislike</a>
+                    <a href="#create-or-update-taste" class="toc-h2 toc-link" data-title="Create or Update Taste">Create or Update Taste</a>
                   </li>
                   <li>
-                    <a href="#delete-like-dislike" class="toc-h2 toc-link" data-title="Delete Like | Dislike">Delete Like | Dislike</a>
+                    <a href="#delete-taste" class="toc-h2 toc-link" data-title="Delete Taste">Delete Taste</a>
                   </li>
               </ul>
           </li>
@@ -887,9 +887,9 @@ Set-Cookie: madome_refresh_token=REFRESH_TOKEN;
 <td>생성 또는 갱신에 성공함</td>
 </tr>
 </tbody></table>
-<h1 id='like'>Like</h1><h2 id='get-likes-dislikes'>Get Likes | Dislikes</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="se">\</span>
+<h1 id='taste'>Taste</h1><h2 id='get-tastes'>Get Tastes</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="se">\</span>
     <span class="nt">-X</span> GET <span class="se">\</span>
-    <span class="s2">"/users/@me/likes?per-page=2"</span> <span class="c"># "/users/@me/dislikes?per-page=2"</span>
+    <span class="s2">"/users/@me/tastes?per-page=2&amp;is-dislike=false"</span>
 </code></pre></div>
 <blockquote>
 <p>Returns JSON</p>
@@ -912,11 +912,9 @@ Set-Cookie: madome_refresh_token=REFRESH_TOKEN;
     </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></code></pre></div>
-<p>사용자가 좋아요한 것들을 가져와요.</p>
+<p>사용자가 좋아요 / 싫어요를 한 것들을 가져와요.</p>
 <h3 id='http-request'>HTTP Request</h3>
-<p><code>GET /users/@me/likes</code></p>
-
-<p><code>GET /users/@me/dislikes</code></p>
+<p><code>GET /users/@me/tastes</code></p>
 <h3 id='query-parameters'>Query Parameters</h3>
 <table><thead>
 <tr>
@@ -946,8 +944,14 @@ Set-Cookie: madome_refresh_token=REFRESH_TOKEN;
 </tr>
 <tr>
 <td>kind</td>
-<td><code>Like</code>의 종류</td>
+<td><code>Taste</code>의 종류</td>
 <td><code>book</code>, <code>book_tag</code></td>
+<td><code>null</code></td>
+</tr>
+<tr>
+<td>is-dislike</td>
+<td>좋아요 / 싫어요를 구분해요. 명시하지 않는 경우에는 좋아요 / 싫어요를 구분하지 않고 모두 가져와요.</td>
+<td><code>boolean</code></td>
 <td><code>null</code></td>
 </tr>
 <tr>
@@ -981,34 +985,30 @@ Set-Cookie: madome_refresh_token=REFRESH_TOKEN;
 <td>성공했어요.</td>
 </tr>
 </tbody></table>
-<h2 id='create-or-update-like-dislike'>Create or Update Like | Dislike</h2>
+<h2 id='create-or-update-taste'>Create or Update Taste</h2>
 <blockquote>
 <p>If book</p>
 </blockquote>
 <div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="se">\</span>
     <span class="nt">-X</span> POST <span class="se">\</span>
-    <span class="nt">-d</span> <span class="s1">'{ "kind": "book", "book_id": 123456 }'</span> <span class="se">\</span>
-    <span class="s2">"/users/@me/likes"</span> <span class="c"># "/users/@me/dislikes"</span>
+    <span class="nt">-d</span> <span class="s1">'{ "kind": "book", "book_id": 123456, "is_dislike": false }'</span> <span class="se">\</span>
+    <span class="s2">"/users/@me/tastes"</span>
 </code></pre></div>
 <blockquote>
 <p>If book_tag</p>
 </blockquote>
 <div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="se">\</span>
     <span class="nt">-X</span> POST <span class="se">\</span>
-    <span class="nt">-d</span> <span class="s1">'{ "kind": "book_tag", "tag_kind": "female", "tag_name": "loli" }'</span> <span class="se">\</span>
-    <span class="s2">"/users/@me/likes"</span> <span class="c"># "/users/@me/dislikes"</span>
+    <span class="nt">-d</span> <span class="s1">'{ "kind": "book_tag", "tag_kind": "female", "tag_name": "loli", "is_dislike": false }'</span> <span class="se">\</span>
+    <span class="s2">"/users/@me/tastes"</span> <span class="c"># "/users/@me/dislikes"</span>
 </code></pre></div>
 <blockquote>
 <p>Returns Nothing</p>
 </blockquote>
 
-<p><code>uri path</code>로 <code>is_dislike</code>을 구분해요.</p>
-
-<p><code>is_dislike</code>이 변경되는 경우에만 업데이트 처리가 돼요. (전에 <code>like</code>이었다면, <code>dislike</code>으로 업데이트 하기 위해서는 <code>/users/@me/dislikes</code>로 요청을 넣어야함)</p>
+<p><code>is_dislike</code>이 변경되는 경우에만 업데이트 처리가 돼요. (전에 <code>like</code>이었다면, <code>dislike</code>으로 업데이트 하기 위해서는 <code>&quot;is_dislike&quot;: true</code>로 요청해야함)</p>
 <h3 id='http-request-2'>HTTP Request</h3>
-<p><code>POST /users/@me/likes</code></p>
-
-<p><code>POST /users/@me/dislikes</code></p>
+<p><code>POST /users/@me/tastes</code></p>
 <h3 id='body-parameters'>Body Parameters</h3><h4 id='book'>Book</h4>
 <table><thead>
 <tr>
@@ -1019,13 +1019,18 @@ Set-Cookie: madome_refresh_token=REFRESH_TOKEN;
 </thead><tbody>
 <tr>
 <td>kind</td>
-<td><code>Like</code>의 종류</td>
+<td><code>Taste</code>의 종류</td>
 <td><code>book</code></td>
 </tr>
 <tr>
 <td>book_id</td>
 <td>책 ID</td>
 <td><code>0 ~</code></td>
+</tr>
+<tr>
+<td>is_dislike</td>
+<td>좋아요 / 싫어요를 구분해요.</td>
+<td><code>boolean</code></td>
 </tr>
 </tbody></table>
 <h4 id='book-tag'>Book Tag</h4>
@@ -1038,7 +1043,7 @@ Set-Cookie: madome_refresh_token=REFRESH_TOKEN;
 </thead><tbody>
 <tr>
 <td>kind</td>
-<td><code>Like</code>의 종류</td>
+<td><code>Taste</code>의 종류</td>
 <td><code>book_tag</code></td>
 </tr>
 <tr>
@@ -1050,6 +1055,11 @@ Set-Cookie: madome_refresh_token=REFRESH_TOKEN;
 <td>tag_name</td>
 <td>태그의 이름</td>
 <td><code>string</code></td>
+</tr>
+<tr>
+<td>is_dislike</td>
+<td>좋아요 / 싫어요를 구분해요.</td>
+<td><code>boolean</code></td>
 </tr>
 </tbody></table>
 <h3 id='http-response-2'>HTTP Response</h3>
@@ -1072,30 +1082,28 @@ Set-Cookie: madome_refresh_token=REFRESH_TOKEN;
 <td>이미 있는 작품 또는 태그인데, 서버에 존재하는 데이터와 <code>is_dislike</code>이 동일해서 업데이트 할 게 없어요.</td>
 </tr>
 </tbody></table>
-<h2 id='delete-like-dislike'>Delete Like | Dislike</h2>
+<h2 id='delete-taste'>Delete Taste</h2>
 <blockquote>
 <p>If book</p>
 </blockquote>
 <div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="se">\</span>
     <span class="nt">-X</span> DELETE <span class="se">\</span>
     <span class="nt">-d</span> <span class="s1">'{ "kind": "book", "book_id": 123456 }'</span> <span class="se">\</span>
-    <span class="s2">"/users/@me/likes"</span> <span class="c"># "/users/@me/dislikes"</span>
+    <span class="s2">"/users/@me/tastes"</span>
 </code></pre></div>
 <blockquote>
 <p>If book_tag</p>
 </blockquote>
 <div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="se">\</span>
     <span class="nt">-X</span> DELETE <span class="se">\</span>
-    <span class="nt">-d</span> <span class="s1">'{ "kind": "book", "tag_kind": "female", "tag_name": "loli" }'</span> <span class="se">\</span>
-    <span class="s2">"/users/@me/likes"</span> <span class="c"># "/users/@me/dislikes"</span>
+    <span class="nt">-d</span> <span class="s1">'{ "kind": "book_tag", "tag_kind": "female", "tag_name": "loli" }'</span> <span class="se">\</span>
+    <span class="s2">"/users/@me/tastes"</span>
 </code></pre></div>
 <blockquote>
 <p>Returns Nothing</p>
 </blockquote>
 <h3 id='http-request-3'>HTTP Request</h3>
-<p><code>DELETE /users/@me/likes</code></p>
-
-<p><code>DELETE /users/@me/dislikes</code></p>
+<p><code>DELETE /users/@me/tastes</code></p>
 <h3 id='body-parameters-2'>Body Parameters</h3><h4 id='book-2'>Book</h4>
 <table><thead>
 <tr>
@@ -1106,7 +1114,7 @@ Set-Cookie: madome_refresh_token=REFRESH_TOKEN;
 </thead><tbody>
 <tr>
 <td>kind</td>
-<td><code>Like</code>의 종류</td>
+<td><code>Taste</code>의 종류</td>
 <td><code>book</code></td>
 </tr>
 <tr>
@@ -1125,7 +1133,7 @@ Set-Cookie: madome_refresh_token=REFRESH_TOKEN;
 </thead><tbody>
 <tr>
 <td>kind</td>
-<td><code>Like</code>의 종류</td>
+<td><code>Taste</code>의 종류</td>
 <td><code>book_tag</code></td>
 </tr>
 <tr>
