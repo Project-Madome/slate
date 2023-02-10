@@ -987,7 +987,7 @@ Set-Cookie: madome_refresh_token=REFRESH_TOKEN;
 </blockquote>
 <div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="se">\</span>
     <span class="nt">-X</span> POST <span class="se">\</span>
-    <span class="nt">-d</span> <span class="s1">'{ "kind": "book", "book_id": 123456, "is_dislike": false }'</span> <span class="se">\</span>
+    <span class="nt">-d</span> <span class="s1">'{ "kind": "book", "book_id": 123456 }'</span> <span class="se">\</span>
     <span class="s2">"/users/@me/likes"</span> <span class="c"># "/users/@me/dislikes"</span>
 </code></pre></div>
 <blockquote>
@@ -995,12 +995,16 @@ Set-Cookie: madome_refresh_token=REFRESH_TOKEN;
 </blockquote>
 <div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="se">\</span>
     <span class="nt">-X</span> POST <span class="se">\</span>
-    <span class="nt">-d</span> <span class="s1">'{ "kind": "book_tag", "tag_kind": "female", "tag_name": "loli", "is_dislike": false }'</span> <span class="se">\</span>
+    <span class="nt">-d</span> <span class="s1">'{ "kind": "book_tag", "tag_kind": "female", "tag_name": "loli" }'</span> <span class="se">\</span>
     <span class="s2">"/users/@me/likes"</span> <span class="c"># "/users/@me/dislikes"</span>
 </code></pre></div>
 <blockquote>
 <p>Returns Nothing</p>
 </blockquote>
+
+<p><code>uri path</code>로 <code>is_dislike</code>을 구분해요.</p>
+
+<p><code>is_dislike</code>이 변경되는 경우에만 업데이트 처리가 돼요. (전에 <code>like</code>이었다면, <code>dislike</code>으로 업데이트 하기 위해서는 <code>/users/@me/dislikes</code>로 요청을 넣어야함)</p>
 <h3 id='http-request-2'>HTTP Request</h3>
 <p><code>POST /users/@me/likes</code></p>
 
@@ -1062,6 +1066,10 @@ Set-Cookie: madome_refresh_token=REFRESH_TOKEN;
 <tr>
 <td>404</td>
 <td>없는 작품 또는 태그예요.</td>
+</tr>
+<tr>
+<td>409</td>
+<td>이미 있는 작품 또는 태그인데, 서버에 존재하는 데이터와 <code>is_dislike</code>이 동일해서 업데이트 할 게 없어요.</td>
 </tr>
 </tbody></table>
 <h2 id='delete-like-dislike'>Delete Like | Dislike</h2>
