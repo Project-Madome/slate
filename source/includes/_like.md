@@ -64,7 +64,7 @@ Code | Description |
 ```shell
 curl \
     -X POST \
-    -d '{ "kind": "book", "book_id": 123456, "is_dislike": false }' \
+    -d '{ "kind": "book", "book_id": 123456 }' \
     "/users/@me/likes" # "/users/@me/dislikes"
 ```
 
@@ -73,11 +73,15 @@ curl \
 ```shell
 curl \
     -X POST \
-    -d '{ "kind": "book_tag", "tag_kind": "female", "tag_name": "loli", "is_dislike": false }' \
+    -d '{ "kind": "book_tag", "tag_kind": "female", "tag_name": "loli" }' \
     "/users/@me/likes" # "/users/@me/dislikes"
 ```
 
 > Returns Nothing
+
+`uri path`로 `is_dislike`을 구분해요.
+
+`is_dislike`이 변경되는 경우에만 업데이트 처리가 돼요. (전에 `like`이었다면, `dislike`으로 업데이트 하기 위해서는 `/users/@me/dislikes`로 요청을 넣어야함)
 
 ### HTTP Request
 
@@ -108,6 +112,7 @@ Code | Description
 ---- | ----------
 201  | 성공했어요.
 404  | 없는 작품 또는 태그예요.
+409  | 이미 있는 작품 또는 태그인데, 서버에 존재하는 데이터와 `is_dislike`이 동일해서 업데이트 할 게 없어요.
 
 ## Delete Like | Dislike
 
