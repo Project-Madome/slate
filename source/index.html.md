@@ -11,7 +11,7 @@ includes:
   - errors
   - auth
   - user
-  - like
+  - taste
   - notification
   - history
   - library
