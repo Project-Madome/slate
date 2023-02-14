@@ -346,7 +346,7 @@ Code | Description
 ```shell
 curl \
     -X GET \
-    /books/:book_id/images
+    /books/2070089/images
 ```
 
 > Returns JSON
@@ -372,8 +372,7 @@ curl \
     "17.jpg",
     "18.jpg",
     "19.jpg",
-    "20.jpg",
-    "21.jpg",
+    "20.jpg"
 ]
 ```
 
@@ -399,7 +398,7 @@ Code | Description
 ```shell
 curl \
     -X GET \
-    /books/:book_id/images/:file_name
+    /books/2070089/images/thumbnail
 ```
 
 > Returns Image
@@ -407,6 +406,8 @@ curl \
 jpg, png, gif, webp, avif 등
 
 file server로 redirect 해주는 방식임
+
+각 작품 별로 파일 이름 `thumbnail`은 무조건 있어요.
 
 ### HTTP Request
 
@@ -424,7 +425,7 @@ file_name | 확장자를 포함한 이미지 파일 이름 | `string`
 ```shell
 curl \
     -X PATCH \
-    /books/1242676/release
+    /books/2070089/release
 ```
 
 > Returns Nothing
