@@ -1848,7 +1848,7 @@ Set-Cookie: madome_refresh_token=REFRESH_TOKEN;
 </tbody></table>
 <h2 id='get-book-image-list'>Get Book Image List</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="se">\</span>
     <span class="nt">-X</span> GET <span class="se">\</span>
-    /books/:book_id/images
+    /books/2070089/images
 </code></pre></div>
 <blockquote>
 <p>Returns JSON</p>
@@ -1873,8 +1873,7 @@ Set-Cookie: madome_refresh_token=REFRESH_TOKEN;
     </span><span class="s2">"17.jpg"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"18.jpg"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"19.jpg"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"20.jpg"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"21.jpg"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"20.jpg"</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></code></pre></div><h3 id='http-request-6'>HTTP Request</h3>
 <p><code>GET /books/:book_id/images</code></p>
@@ -1910,7 +1909,7 @@ Set-Cookie: madome_refresh_token=REFRESH_TOKEN;
 </tbody></table>
 <h2 id='get-book-image'>Get Book Image</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="se">\</span>
     <span class="nt">-X</span> GET <span class="se">\</span>
-    /books/:book_id/images/:file_name
+    /books/2070089/images/thumbnail
 </code></pre></div>
 <blockquote>
 <p>Returns Image</p>
@@ -1919,6 +1918,8 @@ Set-Cookie: madome_refresh_token=REFRESH_TOKEN;
 <p>jpg, png, gif, webp, avif 등</p>
 
 <p>file server로 redirect 해주는 방식임</p>
+
+<p>각 작품 별로 파일 이름 <code>thumbnail</code>은 무조건 있어요.</p>
 <h3 id='http-request-7'>HTTP Request</h3>
 <p><code>GET /books/:book_id/images/:file_name</code></p>
 <h3 id='url-parameters-3'>URL Parameters</h3>
@@ -1942,7 +1943,7 @@ Set-Cookie: madome_refresh_token=REFRESH_TOKEN;
 </tbody></table>
 <h2 id='release-book'>Release Book</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="se">\</span>
     <span class="nt">-X</span> PATCH <span class="se">\</span>
-    /books/1242676/release
+    /books/2070089/release
 </code></pre></div>
 <blockquote>
 <p>Returns Nothing</p>
