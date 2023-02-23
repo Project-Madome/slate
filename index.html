@@ -501,7 +501,11 @@ Code  | Description
 <td>Internal Server Error -- 서버 에러니까 알려주세요.</td>
 </tr>
 </tbody></table>
-<h1 id='auth'>Auth</h1><h2 id='create-authcode'>Create Authcode</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="se">\</span>
+<h1 id='auth'>Auth</h1>
+<p>인증을 사용하는 모든 API에서 <code>X-Madome-Access-Token-Expires</code> 헤더를 통해서 엑세스 토큰의 만료기한을 응답에 포함해요.</p>
+
+<p>해당 값은 JWT의 EXP 값이며, <code>unixtime(secs)</code> 이에요.</p>
+<h2 id='create-authcode'>Create Authcode</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="se">\</span>
     <span class="nt">-X</span> POST <span class="se">\</span>
     <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
     <span class="nt">-d</span> <span class="s1">'{ "email": "user@madome.app" }'</span> <span class="se">\</span>
@@ -634,7 +638,8 @@ Set-Cookie: madome_refresh_token=REFRESH_TOKEN;
 <p>Returns JSON</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json-doc"><code><span class="p">{</span><span class="w">
-    </span><span class="nl">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1e441e4d-f065-4f30-8c59-7e725f18ecf0"</span><span class="w">
+    </span><span class="nl">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1e441e4d-f065-4f30-8c59-7e725f18ecf0"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"access_token_exp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1677133821</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <p>인증</p>
