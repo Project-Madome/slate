@@ -153,6 +153,9 @@ curl \
     "/auth/token
 ```
 
+`Refresh Token Pair`를 통해 토큰을 재발급할 경우에
+이전 토큰은 60초 이후에 제거되며, 해당 토큰으로는 더이상 토큰을 재발급하지 못 해요.
+
 > Returns Set-Cookie to HTTP Headers
 
 ```text
