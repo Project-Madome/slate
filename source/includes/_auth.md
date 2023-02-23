@@ -1,5 +1,9 @@
 # Auth
 
+인증을 사용하는 모든 API에서 `X-Madome-Access-Token-Expires` 헤더를 통해서 엑세스 토큰의 만료기한을 응답에 포함해요.
+
+해당 값은 JWT의 EXP 값이며, `unixtime(secs)` 이에요.
+
 ## Create Authcode
 
 ```shell
@@ -116,7 +120,8 @@ curl \
 
 ```jsonc
 {
-    "user_id": "1e441e4d-f065-4f30-8c59-7e725f18ecf0"
+    "user_id": "1e441e4d-f065-4f30-8c59-7e725f18ecf0",
+    "access_token_exp": 1677133821
 }
 ```
 
