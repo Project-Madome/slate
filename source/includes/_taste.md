@@ -49,7 +49,7 @@ curl \
 
 Parameter | Description | Value |
 --------- | ----------- | ----- |
-taste-kind | 취향의 종류 | `book`, `book-kind` |
+taste-kind | 취향의 종류 | `book`, `book-tag` |
 value | 취향을 식별할 수 있는 값 | `taste-kind`가 `book`일 경우 `0 ~`, `book-tag`일 경우 `tagkind-tagname`
 
 ### HTTP Response
