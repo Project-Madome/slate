@@ -1,5 +1,64 @@
 # Taste
 
+## Get Taste
+
+> If book
+
+```shell
+curl \
+    -X GET \
+    "/users/@me/tastes/book/2458901"
+```
+
+> If book tag
+
+```shell
+curl \
+    -X GET \
+    "/users/@me/tastes/book-tag/female-loli"
+```
+
+> Returns JSON if book
+
+```jsonc
+{
+    "kind": "book",
+    "book_id": 2458901,
+    "is_dislike": false,
+    "created_at": "2023-02-13T09:15:57.279Z"
+}
+```
+
+> Returns JSON if book tag
+
+```jsonc
+{
+    "kind": "book_tag",
+    "tag_kind": "female",
+    "tag_name": "loli",
+    "is_dislike": false,
+    "created_at": "2019-09-18T12:35:33.291Z"
+}
+```
+
+### HTTP Request
+
+`GET /users/@me/tastes/:taste-kind/:value`
+
+### URL Parameters
+
+Parameter | Description | Value |
+--------- | ----------- | ----- |
+taste-kind | 취향의 종류 | `book`, `book-kind` |
+value | 취향을 식별할 수 있는 값 | `taste-kind`가 `book`일 경우 `0 ~`, `book-tag`일 경우 `tagkind-tagname`
+
+### HTTP Response
+
+Code | Description |
+---- | ----------- |
+200  | 성공했어요. |
+404  | 등록하지 않은 취향이에요. |
+
 ## Get Tastes
 
 ```shell
