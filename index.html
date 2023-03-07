@@ -358,6 +358,9 @@
             <a href="#taste" class="toc-h1 toc-link" data-title="Taste">Taste</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#get-taste" class="toc-h2 toc-link" data-title="Get Taste">Get Taste</a>
+                  </li>
+                  <li>
                     <a href="#get-tastes" class="toc-h2 toc-link" data-title="Get Tastes">Get Tastes</a>
                   </li>
                   <li>
@@ -686,7 +689,9 @@ Set-Cookie: madome_refresh_token=REFRESH_TOKEN;
     <span class="s2">"/auth/token
 </span></code></pre></div>
 <p><code>Refresh Token Pair</code>를 통해 토큰을 재발급할 경우에
-이전 토큰은 60초 이후에 제거되며, 해당 토큰으로는 더이상 토큰을 재발급하지 못 해요.</p>
+이전 토큰의 만료기한이
+60초 이상 남아있었다면 60초 이후에 제거되며,
+해당 토큰으로는 더이상 토큰을 재발급하지 못 하게 돼요.</p>
 
 <blockquote>
 <p>Returns Set-Cookie to HTTP Headers</p>
@@ -895,7 +900,79 @@ Set-Cookie: madome_refresh_token=REFRESH_TOKEN;
 <td>생성 또는 갱신에 성공함</td>
 </tr>
 </tbody></table>
-<h1 id='taste'>Taste</h1><h2 id='get-tastes'>Get Tastes</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="se">\</span>
+<h1 id='taste'>Taste</h1><h2 id='get-taste'>Get Taste</h2>
+<blockquote>
+<p>If book</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="se">\</span>
+    <span class="nt">-X</span> GET <span class="se">\</span>
+    <span class="s2">"/users/@me/tastes/book/2458901"</span>
+</code></pre></div>
+<blockquote>
+<p>If book tag</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="se">\</span>
+    <span class="nt">-X</span> GET <span class="se">\</span>
+    <span class="s2">"/users/@me/tastes/book-tag/female-loli"</span>
+</code></pre></div>
+<blockquote>
+<p>Returns JSON if book</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json-doc"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"kind"</span><span class="p">:</span><span class="w"> </span><span class="s2">"book"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"book_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2458901</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"is_dislike"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2023-02-13T09:15:57.279Z"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<blockquote>
+<p>Returns JSON if book tag</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json-doc"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"kind"</span><span class="p">:</span><span class="w"> </span><span class="s2">"book_tag"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"tag_kind"</span><span class="p">:</span><span class="w"> </span><span class="s2">"female"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"tag_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"loli"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"is_dislike"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-09-18T12:35:33.291Z"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h3 id='http-request'>HTTP Request</h3>
+<p><code>GET /users/@me/tastes/:taste-kind/:value</code></p>
+<h3 id='url-parameters'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th>Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>taste-kind</td>
+<td>취향의 종류</td>
+<td><code>book</code>, <code>book-kind</code></td>
+</tr>
+<tr>
+<td>value</td>
+<td>취향을 식별할 수 있는 값</td>
+<td><code>taste-kind</code>가 <code>book</code>일 경우 <code>0 ~</code>, <code>book-tag</code>일 경우 <code>tagkind-tagname</code></td>
+</tr>
+</tbody></table>
+<h3 id='http-response'>HTTP Response</h3>
+<table><thead>
+<tr>
+<th>Code</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>200</td>
+<td>성공했어요.</td>
+</tr>
+<tr>
+<td>404</td>
+<td>등록하지 않은 취향이에요.</td>
+</tr>
+</tbody></table>
+<h2 id='get-tastes'>Get Tastes</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="se">\</span>
     <span class="nt">-X</span> GET <span class="se">\</span>
     <span class="s2">"/users/@me/tastes?per-page=2&amp;is-dislike=false"</span>
 </code></pre></div>
@@ -921,7 +998,7 @@ Set-Cookie: madome_refresh_token=REFRESH_TOKEN;
 </span><span class="p">]</span><span class="w">
 </span></code></pre></div>
 <p>사용자가 좋아요 / 싫어요를 한 것들을 가져와요.</p>
-<h3 id='http-request'>HTTP Request</h3>
+<h3 id='http-request-2'>HTTP Request</h3>
 <p><code>GET /users/@me/tastes</code></p>
 <h3 id='query-parameters'>Query Parameters</h3>
 <table><thead>
@@ -981,7 +1058,7 @@ Set-Cookie: madome_refresh_token=REFRESH_TOKEN;
 <td><code>id-desc</code></td>
 </tr>
 </tbody></table>
-<h3 id='http-response'>HTTP Response</h3>
+<h3 id='http-response-2'>HTTP Response</h3>
 <table><thead>
 <tr>
 <th>Code</th>
@@ -1015,7 +1092,7 @@ Set-Cookie: madome_refresh_token=REFRESH_TOKEN;
 </blockquote>
 
 <p><code>is_dislike</code>이 변경되는 경우에만 업데이트 처리가 돼요. (전에 <code>like</code>이었다면, <code>dislike</code>으로 업데이트 하기 위해서는 <code>&quot;is_dislike&quot;: true</code>로 요청해야함)</p>
-<h3 id='http-request-2'>HTTP Request</h3>
+<h3 id='http-request-3'>HTTP Request</h3>
 <p><code>POST /users/@me/tastes</code></p>
 <h3 id='body-parameters'>Body Parameters</h3><h4 id='book'>Book</h4>
 <table><thead>
@@ -1070,7 +1147,7 @@ Set-Cookie: madome_refresh_token=REFRESH_TOKEN;
 <td><code>boolean</code></td>
 </tr>
 </tbody></table>
-<h3 id='http-response-2'>HTTP Response</h3>
+<h3 id='http-response-3'>HTTP Response</h3>
 <table><thead>
 <tr>
 <th>Code</th>
@@ -1110,7 +1187,7 @@ Set-Cookie: madome_refresh_token=REFRESH_TOKEN;
 <blockquote>
 <p>Returns Nothing</p>
 </blockquote>
-<h3 id='http-request-3'>HTTP Request</h3>
+<h3 id='http-request-4'>HTTP Request</h3>
 <p><code>DELETE /users/@me/tastes</code></p>
 <h3 id='body-parameters-2'>Body Parameters</h3><h4 id='book-2'>Book</h4>
 <table><thead>
@@ -1155,7 +1232,7 @@ Set-Cookie: madome_refresh_token=REFRESH_TOKEN;
 <td><code>string</code></td>
 </tr>
 </tbody></table>
-<h3 id='http-response-3'>HTTP Response</h3>
+<h3 id='http-response-4'>HTTP Response</h3>
 <table><thead>
 <tr>
 <th>Code</th>
