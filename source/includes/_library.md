@@ -334,6 +334,8 @@ curl \
 Parameter | Description | Value
 --------- | ----------- | ----
 tags | 작품 태그들 | `List<Tag>`
+per-page | 그거 | `1 ~ 100`
+page | 그거 | `1 ~`
 
 ### HTTP Response
 
